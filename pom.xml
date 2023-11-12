@@ -11,8 +11,8 @@
     <groupId>dev.chrisjosue</groupId>
     <artifactId>xatruch-barbershop-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>xatruch_barbershop-server</name>
-    <description>xatruch_barbershop-server</description>
+    <name>xatruch-barbershop-server</name>
+    <description>xatruch-barbershop-server</description>
     <properties>
         <java.version>21</java.version>
     </properties>
