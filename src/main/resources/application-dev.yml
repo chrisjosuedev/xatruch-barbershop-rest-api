@@ -3,3 +3,6 @@ spring:
     url: jdbc:mysql://localhost:3306/barbershopserverdb?allowPublicKeyRetrieval=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
     password: admin
+
+clients:
+    CLIENT_SERVER: "http://127.0.0.1:5173"
