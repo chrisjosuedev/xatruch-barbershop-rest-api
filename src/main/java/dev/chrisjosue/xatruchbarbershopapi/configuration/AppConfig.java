@@ -7,6 +7,9 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 public class AppConfig {
 
+    /**
+     * TODO: Config Beans
+     */
     // UserDetails
     // Auth Manager
     // Auth Provider

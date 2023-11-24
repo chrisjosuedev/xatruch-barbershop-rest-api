@@ -1,13 +1,11 @@
 package dev.chrisjosue.xatruchbarbershopapi.domain.entity;
 
-import dev.chrisjosue.xatruchbarbershopapi.domain.enums.Role;
+import dev.chrisjosue.xatruchbarbershopapi.common.enums.Role;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,36 +16,37 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User implements UserDetails {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "first_name", nullable = false)
-    @NotBlank(message = "Name is required.")
-    @Length(min = 2, max = 64, message = "Length must be min 2 and max 64 characters.")
+    @Size(max = 64)
     private String fullName;
 
     @Column(nullable = false)
-    @NotBlank(message = "Email is required.")
-    @Length(min = 2, max = 64, message = "Length must be min 2 and max 64 characters.")
+    @Size(max = 64)
     private String email;
 
     @Column(nullable = false)
-    @NotBlank(message = "Password is required.")
-    private char[] password;
+    @Size(max = 64)
+    private String password;
 
     @Column(name = "profile_url")
+    @Size(max = 255)
     private String profileUrl;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    @NotBlank(message = "Role is required.")
+    @Size(max = 20)
     private Role role;
+
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "user")
+    private List<BookingTempCart> bookingTempCarts;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
