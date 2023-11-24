@@ -1,4 +1,4 @@
-package dev.chrisjosue.xatruchbarbershopapi.domain.dto;
+package dev.chrisjosue.xatruchbarbershopapi.domain.dto.response;
 
 import dev.chrisjosue.xatruchbarbershopapi.common.enums.Role;
 import lombok.AllArgsConstructor;

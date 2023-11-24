@@ -1,4 +1,4 @@
-package dev.chrisjosue.xatruchbarbershopapi.domain.dto;
+package dev.chrisjosue.xatruchbarbershopapi.domain.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

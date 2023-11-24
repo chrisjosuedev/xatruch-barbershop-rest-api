@@ -45,7 +45,7 @@ public class User implements UserDetails {
     @Size(max = 20)
     private Role role;
 
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<BookingTempCart> bookingTempCarts;
 
     @Override

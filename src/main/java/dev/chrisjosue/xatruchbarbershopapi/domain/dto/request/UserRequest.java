@@ -16,7 +16,7 @@ public class UserRequest {
     @Length(min = 2, max = 64, message = "Length must be min 2 and max 64 characters.")
     private String fullName;
 
-    @NotBlank(message = "Name is required.")
+    @NotBlank(message = "Email is required.")
     @Email(message = "Email address is invalid.")
     private String email;
 

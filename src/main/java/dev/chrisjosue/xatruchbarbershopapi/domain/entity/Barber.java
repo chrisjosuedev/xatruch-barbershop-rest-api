@@ -16,7 +16,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Barber extends User {
-    @Temporal(TemporalType.DATE)
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date hired;
 }
