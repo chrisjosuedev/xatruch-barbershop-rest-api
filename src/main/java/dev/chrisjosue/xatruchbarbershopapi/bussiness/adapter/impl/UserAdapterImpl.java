@@ -1,9 +1,8 @@
 package dev.chrisjosue.xatruchbarbershopapi.bussiness.adapter.impl;
 
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.adapter.UserAdapter;
+import dev.chrisjosue.xatruchbarbershopapi.common.enums.PersonType;
 import dev.chrisjosue.xatruchbarbershopapi.common.enums.Role;
-import dev.chrisjosue.xatruchbarbershopapi.domain.entity.Barber;
-import dev.chrisjosue.xatruchbarbershopapi.domain.entity.Review;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,24 +16,15 @@ public class UserAdapterImpl implements UserAdapter {
 
     @Override
     public User setUserToSave(User user) {
-        var userClient = setGlobalUser(user);
-        userClient.setRole(Role.USER_CLIENT);
-        return userClient;
-    }
+        String encryptedPassword = passwordEncoder.encode(user.getPassword());
+        String profileUrl = (user.getProfileUrl() == null ? DEFAULT_URL:user.getProfileUrl());
 
-    @Override
-    public Barber setBarberToSave(Barber barber) {
-        var userBarber = setGlobalUser(barber);
-        userBarber.setRole(Role.USER_BARBER);
-        return userBarber;
-    }
+        user.setPassword(encryptedPassword);
+        user.setProfileUrl(profileUrl);
+        user.setRole(Role.USER);
+        user.setPersonType(PersonType.USER);
+        user.setPasswordUpdated(true);
 
-    private <T extends User> T setGlobalUser(T userEntity) {
-        String encryptedPassword = passwordEncoder.encode(userEntity.getPassword());
-        String profileUrl = (userEntity.getProfileUrl() == null ? DEFAULT_URL:userEntity.getProfileUrl());
-        userEntity.setRole(Role.USER_CLIENT);
-        userEntity.setPassword(encryptedPassword);
-        userEntity.setProfileUrl(profileUrl);
-        return userEntity;
+        return user;
     }
 }

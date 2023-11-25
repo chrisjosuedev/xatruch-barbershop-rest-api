@@ -20,7 +20,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<UserDto> signUp(@Valid @RequestBody UserRequest userRequest) {
-        return new ResponseEntity<>(authFacade.save(userRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(authFacade.signUp(userRequest), HttpStatus.CREATED);
     }
 
 }

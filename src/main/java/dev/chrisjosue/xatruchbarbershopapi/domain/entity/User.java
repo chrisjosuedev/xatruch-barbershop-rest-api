@@ -3,9 +3,7 @@ package dev.chrisjosue.xatruchbarbershopapi.domain.entity;
 import dev.chrisjosue.xatruchbarbershopapi.common.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,16 +16,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
-public class User implements UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "first_name", nullable = false)
-    @Size(max = 64)
-    private String fullName;
-
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class User extends Person implements UserDetails {
     @Column(nullable = false)
     @Size(max = 64)
     private String email;
@@ -43,6 +34,9 @@ public class User implements UserDetails {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column(nullable = false, name = "is_password_updated")
+    private boolean isPasswordUpdated;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<BookingTempCart> bookingTempCarts;

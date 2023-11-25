@@ -1,6 +1,6 @@
 package dev.chrisjosue.xatruchbarbershopapi.common.enums;
 
-public enum Role {
-    ADMIN,
-    USER
+public enum PersonType {
+    USER,
+    BARBER
 }

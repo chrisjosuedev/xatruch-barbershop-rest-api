@@ -24,8 +24,11 @@ public class Review {
     @Size(max = 100)
     private String review;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "is_approved")
     private boolean isApproved;
+
+    @Column(nullable = false, name = "is_active")
+    private boolean isActive;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")

@@ -1,16 +1,14 @@
 package dev.chrisjosue.xatruchbarbershopapi.domain.dto.response;
 
 import dev.chrisjosue.xatruchbarbershopapi.common.enums.Role;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
-    private Long id;
-    private String fullName;
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class UserDto extends PersonDto {
     private String email;
     private String profileUrl;
     private Role role;

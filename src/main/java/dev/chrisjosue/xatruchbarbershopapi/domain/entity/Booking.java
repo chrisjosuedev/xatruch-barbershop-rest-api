@@ -28,7 +28,7 @@ public class Booking {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "barber_id")
-    private Barber barber;
+    private Person person;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "booking")
     private List<BookingDetail> bookingDetails;

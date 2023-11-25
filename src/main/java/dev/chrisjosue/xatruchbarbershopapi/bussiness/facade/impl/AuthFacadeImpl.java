@@ -21,15 +21,20 @@ public class AuthFacadeImpl implements AuthFacade {
     private final UserAdapter userAdapter;
 
     @Override
-    public UserDto save(UserRequest userRequest) {
+    public UserDto signUp(UserRequest userRequest) {
         var userDomain = authRequestMapper.authUserToDomain(userRequest);
         var userSet = userAdapter.setUserToSave(userDomain);
         var userCreated = authService.save(userSet);
 
         /**
-         * Authenticate user when SignUp
+         * TODO: Authenticate (Adapter) user when SignUp
          */
 
         return userDtoMapper.toDto(userCreated);
     }
+
+    /**
+     * Authentication
+     * When Barber send New Passsword and Not allow login
+     */
 }
