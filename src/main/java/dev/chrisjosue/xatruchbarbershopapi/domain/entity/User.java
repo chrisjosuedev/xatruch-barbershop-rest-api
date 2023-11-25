@@ -42,7 +42,6 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    @Size(max = 20)
     private Role role;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
@@ -55,7 +54,7 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     @Override

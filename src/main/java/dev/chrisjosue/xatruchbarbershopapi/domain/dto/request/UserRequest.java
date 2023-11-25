@@ -21,10 +21,6 @@ public class UserRequest {
     private String email;
 
     @NotEmpty(message = "Password is required.")
-    /**
-     * TODO: Passay Validator
-     */
+    @Length(min = 8, message = "Password must have 8 characters min.")
     private String password;
-
-    private String profileUrl;
 }
