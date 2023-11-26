@@ -22,7 +22,7 @@ public class UserAdapterImpl implements UserAdapter {
         user.setPassword(encryptedPassword);
         user.setProfileUrl(profileUrl);
         user.setRole(Role.USER);
-        user.setPersonType(PersonType.USER);
+        user.setPersonType(PersonType.SYSTEM_USER);
         user.setPasswordUpdated(true);
 
         return user;

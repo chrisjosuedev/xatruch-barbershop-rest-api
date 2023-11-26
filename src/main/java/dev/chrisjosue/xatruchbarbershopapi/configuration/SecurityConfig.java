@@ -13,9 +13,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -36,6 +33,7 @@ public class SecurityConfig {
                         .requestMatchers("/services/**").hasAuthority("ADMIN")
                         .requestMatchers("/settings/**").hasAuthority("ADMIN")
                         .requestMatchers("/reviews/approve/**").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/users/**").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/barbers/**").authenticated()
                         .requestMatchers(HttpMethod.GET, "/services/**").authenticated()
                         .anyRequest().authenticated()

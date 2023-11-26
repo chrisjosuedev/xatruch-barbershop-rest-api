@@ -1,6 +1,6 @@
 package dev.chrisjosue.xatruchbarbershopapi.common.enums;
 
 public enum PersonType {
-    USER,
+    SYSTEM_USER,
     BARBER
 }
