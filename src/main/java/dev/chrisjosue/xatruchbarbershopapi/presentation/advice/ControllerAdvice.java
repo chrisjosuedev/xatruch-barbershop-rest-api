@@ -10,6 +10,7 @@ import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -43,7 +44,13 @@ public class ControllerAdvice {
 
     @ExceptionHandler(value = BadCredentialsException.class)
     public ResponseEntity<Object> badCredentialsException(BadCredentialsException badCredentialsException) {
-        var errorDto = errorMapper.errorToDto(badCredentialsException.getClass().getSimpleName(), badCredentialsException.getMessage());
+        var errorDto = errorMapper.errorToDto("password", badCredentialsException.getMessage());
+        return newErrorExceptionsResponse(List.of(errorDto), 403, "Error trying to authenticate user.");
+    }
+
+    @ExceptionHandler(value = UsernameNotFoundException.class)
+    public ResponseEntity<Object>userNotFoundException(UsernameNotFoundException usernameNotFoundException) {
+        var errorDto = errorMapper.errorToDto("username", usernameNotFoundException.getMessage());
         return newErrorExceptionsResponse(List.of(errorDto), 403, "Error trying to authenticate user.");
     }
 

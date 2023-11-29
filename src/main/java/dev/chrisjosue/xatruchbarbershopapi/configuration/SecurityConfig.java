@@ -29,13 +29,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/auth/forgot-password/**").permitAll()
-                        .requestMatchers("/barbers/**").hasAuthority("ADMIN")
-                        .requestMatchers("/services/**").hasAuthority("ADMIN")
-                        .requestMatchers("/settings/**").hasAuthority("ADMIN")
-                        .requestMatchers("/reviews/approve/**").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/users/**").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/barbers/**").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/services/**").authenticated()
+                        /*
+                         * TODO:
+                         * Customize endpoints available to User and Admin
+                         */
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
