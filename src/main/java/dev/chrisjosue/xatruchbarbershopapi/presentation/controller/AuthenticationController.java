@@ -1,8 +1,9 @@
 package dev.chrisjosue.xatruchbarbershopapi.presentation.controller;
 
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.builder.ApiBuilder;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.AuthenticationFacade;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.UserFacade;
-import dev.chrisjosue.xatruchbarbershopapi.common.ResponseBuilder;
+import dev.chrisjosue.xatruchbarbershopapi.common.enums.Responses;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.LoginRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.UserRequest;
 import jakarta.validation.Valid;
@@ -21,25 +22,28 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
     private final UserFacade userFacade;
     private final AuthenticationFacade authenticationFacade;
+    private final ApiBuilder apiBuilder;
 
     @PostMapping("/signup")
     public ResponseEntity<Object> signUp(@Valid @RequestBody UserRequest userRequest) {
         userFacade.signUp(userRequest);
         var authenticatedUser = authenticationFacade.authenticateUser(userRequest.getEmail(), userRequest.getPassword());
-        return ResponseBuilder.responseHandler(
+        return apiBuilder.build(
                 201,
                 "User registered successfully.",
-                authenticatedUser
+                authenticatedUser,
+                Responses.DATA
         );
     }
 
     @PostMapping("/signin")
     public ResponseEntity<Object> signIn(@Valid @RequestBody LoginRequest loginRequest) {
         var authenticatedUser = authenticationFacade.authenticateUser(loginRequest.getEmail(), loginRequest.getPassword());
-        return ResponseBuilder.responseHandler(
+        return apiBuilder.build(
                 200,
                 "User logged successfully.",
-                authenticatedUser
+                authenticatedUser,
+                Responses.DATA
         );
     }
 }

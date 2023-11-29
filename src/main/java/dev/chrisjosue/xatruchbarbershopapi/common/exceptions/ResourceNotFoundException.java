@@ -6,11 +6,11 @@ import org.springframework.http.HttpStatus;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class ResourceNotFound extends RuntimeException {
+public class ResourceNotFoundException extends BusinessException {
     private HttpStatus httpStatus;
 
-    public ResourceNotFound(String message) {
-        super(message);
+    public ResourceNotFoundException(String message, String field) {
+        super(message, field);
         this.httpStatus = HttpStatus.NOT_FOUND;
     }
 }

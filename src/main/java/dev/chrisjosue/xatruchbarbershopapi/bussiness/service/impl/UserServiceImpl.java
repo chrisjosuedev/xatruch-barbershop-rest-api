@@ -2,7 +2,7 @@ package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.impl;
 
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.UserService;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.ConflictException;
-import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.ResourceNotFound;
+import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.ResourceNotFoundException;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.User;
 import dev.chrisjosue.xatruchbarbershopapi.persistance.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     public void save(User user) {
         Optional<User> userExists = userRepository.findByEmail(user.getEmail());
         if (userExists.isPresent())
-            throw new ConflictException("User already exists.");
+            throw new ConflictException("User already exists.", "email");
         userRepository.save(user);
     }
 
@@ -27,6 +27,6 @@ public class UserServiceImpl implements UserService {
     public User findUserByEmail(String email) {
         return userRepository
                 .findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFound("User not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found.", "email"));
     }
 }

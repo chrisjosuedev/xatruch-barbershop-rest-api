@@ -1,6 +1,5 @@
 package dev.chrisjosue.xatruchbarbershopapi.domain.dto.request;
 
-import dev.chrisjosue.xatruchbarbershopapi.domain.entity.Person;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -12,7 +11,7 @@ import org.hibernate.validator.constraints.Length;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class UserRequest extends Person {
+public class UserRequest extends PersonRequest {
     @NotBlank(message = "Email is required.")
     @Email(message = "Email address is invalid.")
     private String email;
