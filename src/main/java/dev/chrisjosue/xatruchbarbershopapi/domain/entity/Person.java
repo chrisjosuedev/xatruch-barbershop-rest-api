@@ -1,6 +1,5 @@
 package dev.chrisjosue.xatruchbarbershopapi.domain.entity;
 
-import dev.chrisjosue.xatruchbarbershopapi.common.enums.PersonType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -20,7 +19,9 @@ public class Person {
     @Size(max = 64)
     private String fullName;
 
-    @Column(name = "type", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private PersonType personType;
+    @Column(name = "is_barber", nullable = false)
+    private Boolean isBarber;
+
+    @Column(name = "is_active", nullable = false)
+    private Boolean isActive;
 }

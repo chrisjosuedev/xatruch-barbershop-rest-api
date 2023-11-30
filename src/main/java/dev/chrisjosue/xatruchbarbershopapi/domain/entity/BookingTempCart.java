@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class BookingTempCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")

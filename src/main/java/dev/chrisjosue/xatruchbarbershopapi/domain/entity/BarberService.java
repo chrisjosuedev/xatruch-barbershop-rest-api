@@ -26,10 +26,10 @@ public class BarberService {
     private Double price;
 
     @Column(name = "is_published", nullable = false)
-    private boolean isPublished;
+    private Boolean isPublished;
 
     @Column(name = "is_active", nullable = false)
-    private boolean isActive;
+    private Boolean isActive;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "barberService")
     private List<BookingTempCart> bookingTempCarts;

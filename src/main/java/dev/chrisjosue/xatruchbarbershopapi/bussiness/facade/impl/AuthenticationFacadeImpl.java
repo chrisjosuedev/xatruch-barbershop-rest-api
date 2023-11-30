@@ -2,7 +2,7 @@ package dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.impl;
 
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.AuthenticationFacade;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.auth.AuthenticationResponseMapper;
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.UserService;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.app.UserService;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.AuthenticationDtoResponse;
 import dev.chrisjosue.xatruchbarbershopapi.security.JwtService;
 import lombok.RequiredArgsConstructor;

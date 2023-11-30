@@ -1,6 +1,6 @@
-package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.impl;
+package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.app.impl;
 
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.UserService;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.app.UserService;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.ConflictException;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.ResourceNotFoundException;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.User;

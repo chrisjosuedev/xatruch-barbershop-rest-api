@@ -36,7 +36,7 @@ public class User extends Person implements UserDetails {
     private Role role;
 
     @Column(nullable = false, name = "is_password_updated")
-    private boolean isPasswordUpdated;
+    private Boolean isPasswordUpdated;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<BookingTempCart> bookingTempCarts;

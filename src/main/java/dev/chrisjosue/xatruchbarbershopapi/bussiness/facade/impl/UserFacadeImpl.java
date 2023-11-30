@@ -1,13 +1,10 @@
 package dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.impl;
 
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.adapter.UserAdapter;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.setter.UserSetter;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.UserFacade;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.user.UserRequestToDomainMapper;
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.user.DomainToUserDtoMapper;
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.UserService;
-import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.LoginRequest;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.app.UserService;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.UserRequest;
-import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,13 +15,12 @@ import org.springframework.stereotype.Service;
 public class UserFacadeImpl implements UserFacade {
     private final UserService userService;
     private final UserRequestToDomainMapper userRequestToDomainMapper;
-    private final DomainToUserDtoMapper domainToUserDtoMapper;
-    private final UserAdapter userAdapter;
+    private final UserSetter userSetter;
 
     @Override
     public void signUp(UserRequest userRequest) {
-        var userDomain = userRequestToDomainMapper.authUserToDomain(userRequest);
-        var userSet = userAdapter.setUserToSave(userDomain);
+        var userDomain = userRequestToDomainMapper.toDomain(userRequest);
+        var userSet = userSetter.setUserToSave(userDomain);
         userService.save(userSet);
     }
 

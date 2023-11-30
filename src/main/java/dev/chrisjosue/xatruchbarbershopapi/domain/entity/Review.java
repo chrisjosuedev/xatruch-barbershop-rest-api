@@ -25,10 +25,10 @@ public class Review {
     private String review;
 
     @Column(nullable = false, name = "is_approved")
-    private boolean isApproved;
+    private Boolean isApproved;
 
     @Column(nullable = false, name = "is_active")
-    private boolean isActive;
+    private Boolean isActive;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")

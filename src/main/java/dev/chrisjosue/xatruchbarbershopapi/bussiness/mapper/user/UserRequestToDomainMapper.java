@@ -8,5 +8,5 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface UserRequestToDomainMapper {
     UserRequestToDomainMapper mapper = Mappers.getMapper(UserRequestToDomainMapper.class);
-    User authUserToDomain(UserRequest userRequest);
+    User toDomain(UserRequest userRequest);
 }

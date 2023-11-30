@@ -1,7 +1,6 @@
-package dev.chrisjosue.xatruchbarbershopapi.bussiness.adapter.impl;
+package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.setter.impl;
 
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.adapter.UserAdapter;
-import dev.chrisjosue.xatruchbarbershopapi.common.enums.PersonType;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.setter.UserSetter;
 import dev.chrisjosue.xatruchbarbershopapi.common.enums.Role;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.User;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class UserAdapterImpl implements UserAdapter {
+public class UserSetterImpl implements UserSetter {
     private final PasswordEncoder passwordEncoder;
     private static final String DEFAULT_URL = "https://i.stack.imgur.com/l60Hf.png";
 
@@ -22,8 +21,9 @@ public class UserAdapterImpl implements UserAdapter {
         user.setPassword(encryptedPassword);
         user.setProfileUrl(profileUrl);
         user.setRole(Role.USER);
-        user.setPersonType(PersonType.SYSTEM_USER);
-        user.setPasswordUpdated(true);
+        user.setIsActive(true);
+        user.setIsBarber(false);
+        user.setIsPasswordUpdated(true);
 
         return user;
     }
