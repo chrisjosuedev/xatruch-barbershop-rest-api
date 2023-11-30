@@ -9,6 +9,7 @@ import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.ErrorDetailRespon
 import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -26,38 +27,44 @@ public class ControllerAdvice {
 
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<Object> exception(Exception exception) {
-        var errorDto = errorMapper.errorToDto("General Exception.", exception.getMessage());
-        return newErrorExceptionsResponse(List.of(errorDto), 500, "Error trying to complete the action.");
+        var errorDto = errorMapper.errorToDto("Excepción en la ejecución.", exception.getMessage());
+        return newErrorExceptionsResponse(List.of(errorDto), 500, "Error en la ejecución de la acción en el servidor.");
+    }
+
+    @ExceptionHandler(value = AccessDeniedException.class)
+    public ResponseEntity<Object> accessDeniedException(AccessDeniedException accessDeniedException) {
+        var errorDto = errorMapper.errorToDto("permissions", accessDeniedException.getMessage());
+        return newErrorExceptionsResponse(List.of(errorDto), 403, "Error al intentar acceder a un recurso.");
     }
 
     @ExceptionHandler(value = ConflictException.class)
     public ResponseEntity<Object> conflictException(ConflictException conflictException) {
         var errorDto = errorMapper.errorToDto(conflictException.getField(), conflictException.getMessage());
-        return newErrorExceptionsResponse(List.of(errorDto), 409, "Conflicts in resource.");
+        return newErrorExceptionsResponse(List.of(errorDto), 409, "Conflictos en el recurso.");
     }
 
     @ExceptionHandler(value = ResourceNotFoundException.class)
     public ResponseEntity<Object> resourceNotFoundException(ResourceNotFoundException resourceNotFoundException) {
         var errorDto = errorMapper.errorToDto(resourceNotFoundException.getField(), resourceNotFoundException.getMessage());
-        return newErrorExceptionsResponse(List.of(errorDto), 404, "Error trying to find resource.");
+        return newErrorExceptionsResponse(List.of(errorDto), 404, "Error intentando encontrar el recurso.");
     }
 
     @ExceptionHandler(value = BadCredentialsException.class)
     public ResponseEntity<Object> badCredentialsException(BadCredentialsException badCredentialsException) {
         var errorDto = errorMapper.errorToDto("password", badCredentialsException.getMessage());
-        return newErrorExceptionsResponse(List.of(errorDto), 403, "Error trying to authenticate user.");
+        return newErrorExceptionsResponse(List.of(errorDto), 403, "Error intentando autenticar al usuario.");
     }
 
     @ExceptionHandler(value = UsernameNotFoundException.class)
     public ResponseEntity<Object>userNotFoundException(UsernameNotFoundException usernameNotFoundException) {
-        var errorDto = errorMapper.errorToDto("username", usernameNotFoundException.getMessage());
-        return newErrorExceptionsResponse(List.of(errorDto), 403, "Error trying to authenticate user.");
+        var errorDto = errorMapper.errorToDto("email", usernameNotFoundException.getMessage());
+        return newErrorExceptionsResponse(List.of(errorDto), 403, "Error intentando autenticar al usuario.");
     }
 
     @ExceptionHandler(value = MethodArgumentTypeMismatchException.class)
     public ResponseEntity<Object> methodArgumentTypeMismatchException(MethodArgumentTypeMismatchException mismatchException) {
         var errorDto = errorMapper.errorToDto(mismatchException.getClass().getSimpleName(), mismatchException.getMessage());
-        return newErrorExceptionsResponse(List.of(errorDto), 400, "Error argument type.");
+        return newErrorExceptionsResponse(List.of(errorDto), 400, "Error en el tipo de argumento.");
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
@@ -67,7 +74,7 @@ public class ControllerAdvice {
                 .stream()
                 .map(errorMapper -> new ErrorDetailResponseDto(errorMapper.getField(), errorMapper.getDefaultMessage()))
                 .toList();
-        return newErrorExceptionsResponse(errors, 400, "Not valid arguments.");
+        return newErrorExceptionsResponse(errors, 400, "Argumentos inválidos.");
     }
 
     @ExceptionHandler(value = ConstraintViolationException.class)
@@ -79,7 +86,7 @@ public class ControllerAdvice {
                         errorMapper.getPropertyPath().toString(),
                         errorMapper.getMessage()))
                 .toList();
-        return newErrorExceptionsResponse(errors, 400, "Error trying to store data due to invalid fields.");
+        return newErrorExceptionsResponse(errors, 400, "Error intentando guardar datos.");
     }
 
     private ResponseEntity<Object> newErrorExceptionsResponse(List<ErrorDetailResponseDto> errors, int statusCode, String globalMessage) {

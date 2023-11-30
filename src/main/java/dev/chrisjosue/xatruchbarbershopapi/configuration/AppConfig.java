@@ -32,7 +32,7 @@ public class AppConfig {
     public UserDetailsService userDetailsService() {
         return (email -> userRepository
                 .findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User does not exists.")));
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no existe.")));
     }
 
     @Bean

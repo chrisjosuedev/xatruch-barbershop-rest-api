@@ -28,7 +28,7 @@ public class AuthenticationController {
         var authenticatedUser = authenticationFacade.authenticateUser(userRequest.getEmail(), userRequest.getPassword());
         return apiBuilder.build(
                 201,
-                "User registered successfully.",
+                "Usuario registrado con éxito.",
                 authenticatedUser,
                 Responses.DATA
         );
@@ -39,7 +39,7 @@ public class AuthenticationController {
         var authenticatedUser = authenticationFacade.authenticateUser(loginRequest.getEmail(), loginRequest.getPassword());
         return apiBuilder.build(
                 200,
-                "User logged successfully.",
+                "Usuario logeado con éxito.",
                 authenticatedUser,
                 Responses.DATA
         );

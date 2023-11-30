@@ -27,7 +27,8 @@ public class BarberServiceImpl implements BarberService {
     @Override
     public Person findById(Long id) {
         return barberRepository.findByIdAndIsBarberIsTrueAndIsActiveIsTrue(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User does not exists.", "id"));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format("Barbero con id: %s no existe.", id), "id"));
     }
 
     @Override

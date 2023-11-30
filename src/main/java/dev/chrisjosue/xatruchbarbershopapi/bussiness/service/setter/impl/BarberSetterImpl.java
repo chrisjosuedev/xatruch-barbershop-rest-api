@@ -24,7 +24,7 @@ public class BarberSetterImpl implements BarberSetter {
 
     @Override
     public Person setPersonToDelete(Person barberFound) {
-        barberFound.setIsActive(true);
+        barberFound.setIsActive(false);
         return barberFound;
     }
 }

@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     public void save(User user) {
         Optional<User> userExists = userRepository.findByEmail(user.getEmail());
         if (userExists.isPresent())
-            throw new ConflictException("User already exists.", "email");
+            throw new ConflictException("Email ya no esta disponible.", "email");
         userRepository.save(user);
     }
 
@@ -27,6 +27,6 @@ public class UserServiceImpl implements UserService {
     public User findUserByEmail(String email) {
         return userRepository
                 .findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found.", "email"));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado.", "email"));
     }
 }
