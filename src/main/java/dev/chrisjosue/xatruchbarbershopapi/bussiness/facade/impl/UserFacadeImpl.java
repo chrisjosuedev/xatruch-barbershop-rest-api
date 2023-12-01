@@ -1,6 +1,6 @@
 package dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.impl;
 
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.setter.UserSetter;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.UserCases;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.UserFacade;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.user.UserRequestToDomainMapper;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.app.UserService;
@@ -15,12 +15,12 @@ import org.springframework.stereotype.Service;
 public class UserFacadeImpl implements UserFacade {
     private final UserService userService;
     private final UserRequestToDomainMapper userRequestToDomainMapper;
-    private final UserSetter userSetter;
+    private final UserCases userCases;
 
     @Override
     public void signUp(UserRequest userRequest) {
         var userDomain = userRequestToDomainMapper.toDomain(userRequest);
-        var userSet = userSetter.setUserToSave(userDomain);
+        var userSet = userCases.setUserToSave(userDomain);
         userService.save(userSet);
     }
 

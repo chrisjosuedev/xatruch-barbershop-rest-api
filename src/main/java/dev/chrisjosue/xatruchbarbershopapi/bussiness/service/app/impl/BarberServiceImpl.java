@@ -32,6 +32,11 @@ public class BarberServiceImpl implements BarberService {
     }
 
     @Override
+    public void remove(Person person) {
+        barberRepository.save(person);
+    }
+
+    @Override
     public List<Person> findAll() {
         return barberRepository.findAllByIsBarberIsTrueAndIsActiveIsTrue();
     }

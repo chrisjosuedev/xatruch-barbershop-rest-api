@@ -1,6 +1,6 @@
-package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.setter.impl;
+package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.impl;
 
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.setter.BarberSetter;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.BarberCases;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.PersonRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.Person;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class BarberSetterImpl implements BarberSetter {
+public class BarberCasesImpl implements BarberCases {
     @Override
     public Person setPersonToSave(Person person) {
         person.setIsBarber(true);

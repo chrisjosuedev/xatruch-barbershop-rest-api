@@ -12,3 +12,6 @@ spring:
     show-sql: true
   profiles:
     active: dev
+
+values:
+  DEFAULT_PROFILE_PICTURE: "https://res.cloudinary.com/def8hdamv/image/upload/v1701453504/barber-app/qnnolu3m8se0zqe5rilq.png"
