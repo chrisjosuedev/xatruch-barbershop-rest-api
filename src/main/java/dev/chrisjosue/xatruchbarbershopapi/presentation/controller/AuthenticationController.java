@@ -9,10 +9,9 @@ import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.UserRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/auth")
@@ -41,6 +40,17 @@ public class AuthenticationController {
                 200,
                 "Usuario logeado con éxito.",
                 authenticatedUser,
+                Responses.DATA
+        );
+    }
+
+    @GetMapping("/refresh-token")
+    public ResponseEntity<Object> signIn(Principal principal) {
+        var renewedToken = authenticationFacade.refreshToken(principal);
+        return apiBuilder.build(
+                200,
+                "Token renovado.",
+                renewedToken,
                 Responses.DATA
         );
     }

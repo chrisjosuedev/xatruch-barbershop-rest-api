@@ -1,21 +1,24 @@
 package dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.impl;
 
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.user.DomainToUserDtoMapper;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.UserCases;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.UserFacade;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.user.UserRequestToDomainMapper;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.app.UserService;
+import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.PasswordUpdateRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.UserRequest;
+import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.UserUpdateRequest;
+import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.UserDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class UserFacadeImpl implements UserFacade {
     private final UserService userService;
-    private final UserRequestToDomainMapper userRequestToDomainMapper;
     private final UserCases userCases;
+    private final UserRequestToDomainMapper userRequestToDomainMapper;
+    private final DomainToUserDtoMapper domainToUserDtoMapper;
 
     @Override
     public void signUp(UserRequest userRequest) {
@@ -24,4 +27,26 @@ public class UserFacadeImpl implements UserFacade {
         userService.save(userSet);
     }
 
+    @Override
+    public UserDto update(Long id, UserUpdateRequest userUpdateRequest) {
+        var userToUpdate = userService.findById(id);
+        var userSet = userCases.setUserToUpdate(userUpdateRequest, userToUpdate);
+        var userUpdated = userService.update(userSet);
+        return domainToUserDtoMapper.toDto(userUpdated);
+    }
+
+    @Override
+    public UserDto findById(Long id) {
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) {}
+
+    @Override
+    public void updatePassword(Long id, PasswordUpdateRequest passwordUpdateRequest) {
+        var userToUpdate = userService.findById(id);
+        var userSet = userCases.setUserToUpdatePassword(passwordUpdateRequest, userToUpdate);
+        userService.update(userSet);
+    }
 }

@@ -3,6 +3,7 @@ package dev.chrisjosue.xatruchbarbershopapi.presentation.advice;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.builder.ApiBuilder;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.errors.ErrorToDtoMapper;
 import dev.chrisjosue.xatruchbarbershopapi.common.enums.Responses;
+import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.BusinessException;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.ConflictException;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.ResourceNotFoundException;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.ErrorDetailResponseDto;
@@ -29,6 +30,12 @@ public class ControllerAdvice {
     public ResponseEntity<Object> exception(Exception exception) {
         var errorDto = errorMapper.errorToDto("Excepción en la ejecución.", exception.getMessage());
         return newErrorExceptionsResponse(List.of(errorDto), 500, "Error en la ejecución de la acción en el servidor.");
+    }
+
+    @ExceptionHandler(value = BusinessException.class)
+    public ResponseEntity<Object> businessException(BusinessException businessException) {
+        var errorDto = errorMapper.errorToDto(businessException.getField(), businessException.getMessage());
+        return newErrorExceptionsResponse(List.of(errorDto), 400, "Error al procesar acción.");
     }
 
     @ExceptionHandler(value = AccessDeniedException.class)
