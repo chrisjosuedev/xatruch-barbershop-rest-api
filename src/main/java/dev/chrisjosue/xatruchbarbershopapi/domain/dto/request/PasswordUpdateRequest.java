@@ -11,16 +11,16 @@ import org.hibernate.validator.constraints.Length;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@PasswordMatch
+@PasswordMatch(message = "Confirmar Contraseña no coincide.")
 public class PasswordUpdateRequest {
-    @NotEmpty(message = "Current Password is required.")
+    @NotEmpty(message = "Contraseña actual es requrida.")
     private String currentPassword;
 
-    @NotEmpty(message = "New Password is required.")
-    @Length(min = 8, message = "New Password must have 8 characters min.")
+    @NotEmpty(message = "Nueva contraseña es requerida.")
+    @Length(min = 8, message = "Nueva contraseña debe tener 8 caracteres mínimo.")
     private String newPassword;
 
-    @NotEmpty(message = "Confirm Password is required.")
-    @Length(min = 8, message = "Confirm Password must have 8 characters min.")
+    @NotEmpty(message = "Confirmar contraseña es requrido.")
+    @Length(min = 8, message = "Confirmar contraseña debe tener 8 caracteres mínimo.")
     private String confirmPassword;
 }

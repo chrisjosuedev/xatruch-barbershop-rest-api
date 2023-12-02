@@ -37,11 +37,8 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public UserDto findById(Long id) {
-        return null;
+        return domainToUserDtoMapper.toDto(userService.findById(id));
     }
-
-    @Override
-    public void delete(Long id) {}
 
     @Override
     public void updatePassword(Long id, PasswordUpdateRequest passwordUpdateRequest) {

@@ -10,7 +10,7 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class UserUpdateRequest extends PersonRequest {
-    @NotBlank(message = "Email is required.")
-    @Email(message = "Email address is invalid.")
+    @NotBlank(message = "Email es requerido.")
+    @Email(message = "Email es inválido.")
     private String email;
 }

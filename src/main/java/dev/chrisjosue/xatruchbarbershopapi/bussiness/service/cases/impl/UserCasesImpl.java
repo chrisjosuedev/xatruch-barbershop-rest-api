@@ -41,7 +41,7 @@ public class UserCasesImpl implements UserCases {
     @Override
     public User setUserToUpdatePassword(PasswordUpdateRequest passwordUpdateRequest, User user) {
         var passwordMatch = passwordEncoder.matches(passwordUpdateRequest.getCurrentPassword(), user.getPassword());
-        if (!passwordMatch) throw new BusinessException("Contraseñas no coinciden", "confirmPassword");
+        if (!passwordMatch) throw new BusinessException("Contraseña actual incorrecta.", "confirmPassword");
 
         user.setPassword(passwordEncoder.encode(passwordUpdateRequest.getNewPassword()));
         return user;

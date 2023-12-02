@@ -9,19 +9,26 @@ import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.ResourceNotFoundExc
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.ErrorDetailResponseDto;
 import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.validator.internal.properties.Field;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @RestControllerAdvice
 @RequiredArgsConstructor
+@Slf4j
 public class ControllerAdvice {
     private final ErrorToDtoMapper errorMapper;
     private final ApiBuilder apiBuilder;
@@ -63,7 +70,7 @@ public class ControllerAdvice {
     }
 
     @ExceptionHandler(value = UsernameNotFoundException.class)
-    public ResponseEntity<Object>userNotFoundException(UsernameNotFoundException usernameNotFoundException) {
+    public ResponseEntity<Object> userNotFoundException(UsernameNotFoundException usernameNotFoundException) {
         var errorDto = errorMapper.errorToDto("email", usernameNotFoundException.getMessage());
         return newErrorExceptionsResponse(List.of(errorDto), 403, "Error intentando autenticar al usuario.");
     }
@@ -76,11 +83,17 @@ public class ControllerAdvice {
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<Object> methodArgumentNotValidException(MethodArgumentNotValidException methodArgumentNotValidException) {
-        var errorDetails = methodArgumentNotValidException.getBindingResult().getFieldErrors();
+        var errorDetails = methodArgumentNotValidException.getBindingResult().getAllErrors();
         List<ErrorDetailResponseDto> errors = errorDetails
                 .stream()
-                .map(errorMapper -> new ErrorDetailResponseDto(errorMapper.getField(), errorMapper.getDefaultMessage()))
+                .map(errorMapper -> {
+                    if (errorMapper instanceof FieldError fieldError) {
+                        return new ErrorDetailResponseDto(fieldError.getField(), fieldError.getDefaultMessage());
+                    }
+                    return new ErrorDetailResponseDto(errorMapper.getCode(), errorMapper.getDefaultMessage());
+                })
                 .toList();
+
         return newErrorExceptionsResponse(errors, 400, "Argumentos inválidos.");
     }
 

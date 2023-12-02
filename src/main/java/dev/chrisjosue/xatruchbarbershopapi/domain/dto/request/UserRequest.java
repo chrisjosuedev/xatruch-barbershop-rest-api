@@ -12,11 +12,11 @@ import org.hibernate.validator.constraints.Length;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class UserRequest extends PersonRequest {
-    @NotBlank(message = "Email is required.")
-    @Email(message = "Email address is invalid.")
+    @NotBlank(message = "Email es requerido.")
+    @Email(message = "Email es inválido.")
     private String email;
 
-    @NotEmpty(message = "Password is required.")
-    @Length(min = 8, message = "Password must have 8 characters min.")
+    @NotEmpty(message = "Contraseña es requerida.")
+    @Length(min = 8, message = "Contraseña debe tener 8 caracteres mínimo.")
     private String password;
 }

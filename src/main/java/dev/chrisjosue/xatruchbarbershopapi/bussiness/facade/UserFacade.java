@@ -9,6 +9,5 @@ public interface UserFacade {
     UserDto findById(Long id);
     void signUp(UserRequest userRequest);
     UserDto update(Long id, UserUpdateRequest userUpdateRequest);
-    void delete(Long id);
     void updatePassword(Long id, PasswordUpdateRequest passwordUpdateRequest);
 }

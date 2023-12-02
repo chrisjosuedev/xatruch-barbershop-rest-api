@@ -9,10 +9,7 @@ import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.UserUpdateRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -24,13 +21,12 @@ public class UserController {
     private final AuthenticationFacade authenticationFacade;
     private final ApiBuilder apiBuilder;
 
-    /*
-     * TODO:
-     *  (x) update(UserUpdateRequest userUpdate) - PUT
-     *  () updatePassword(PasswordRequest passwordRequest) - PUT
-     *  () remove(Principal) - DELETE
-     *  () loadPicture(Image) - POST
-     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
+        var userFound = userFacade.findById(id);
+        return apiBuilder.build(200, "Usuario encontrado.", userFound, Responses.DATA);
+    }
+
     @PutMapping
     public ResponseEntity<Object> update(Principal principal, @Valid @RequestBody UserUpdateRequest userUpdateRequest) {
         var loggedUser = authenticationFacade.principalUser(principal);
@@ -48,7 +44,7 @@ public class UserController {
         return apiBuilder.build(200, "Datos de usuario actualizados.", userUpdated, Responses.DATA);
     }
 
-    @PutMapping
+    @PutMapping("/change-password")
     public ResponseEntity<Object> changePassword(Principal principal, @Valid @RequestBody PasswordUpdateRequest passwordUpdateRequest) {
         var loggedUser = authenticationFacade.principalUser(principal);
         userFacade.updatePassword(loggedUser.getId(), passwordUpdateRequest);
