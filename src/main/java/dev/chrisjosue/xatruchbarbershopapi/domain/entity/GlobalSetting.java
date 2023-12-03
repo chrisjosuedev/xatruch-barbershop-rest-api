@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -15,16 +16,16 @@ import java.util.Date;
 public class GlobalSetting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private byte id;
+    private Byte id;
 
     @Column(name = "start_availability", nullable = false)
     @Temporal(TemporalType.TIME)
-    private Date startDailyAvailability;
+    private LocalTime startDailyAvailability;
 
     @Column(name = "end_availability", nullable = false)
     @Temporal(TemporalType.TIME)
-    private Date endDailyAvailability;
+    private LocalTime endDailyAvailability;
 
     @Column(name = "is_active", nullable = false)
-    private boolean isActive;
+    private Boolean isActive;
 }

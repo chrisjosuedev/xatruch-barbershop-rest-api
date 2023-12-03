@@ -5,6 +5,7 @@ import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.errors.ErrorToDtoMap
 import dev.chrisjosue.xatruchbarbershopapi.common.enums.Responses;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.BusinessException;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.ConflictException;
+import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.MethodNotAllowedException;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.ResourceNotFoundException;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.ErrorDetailResponseDto;
 import jakarta.validation.ConstraintViolationException;
@@ -63,6 +64,12 @@ public class ControllerAdvice {
         return newErrorExceptionsResponse(List.of(errorDto), 404, "Error intentando encontrar el recurso.");
     }
 
+    @ExceptionHandler(value = MethodNotAllowedException.class)
+    public ResponseEntity<Object> methodNotAllowedException(MethodNotAllowedException methodNotAllowedException) {
+        var errorDto = errorMapper.errorToDto(methodNotAllowedException.getField(), methodNotAllowedException.getMessage());
+        return newErrorExceptionsResponse(List.of(errorDto), 405, "Error al intentar realizar petición.");
+    }
+
     @ExceptionHandler(value = BadCredentialsException.class)
     public ResponseEntity<Object> badCredentialsException(BadCredentialsException badCredentialsException) {
         var errorDto = errorMapper.errorToDto("password", badCredentialsException.getMessage());
@@ -74,6 +81,7 @@ public class ControllerAdvice {
         var errorDto = errorMapper.errorToDto("email", usernameNotFoundException.getMessage());
         return newErrorExceptionsResponse(List.of(errorDto), 403, "Error intentando autenticar al usuario.");
     }
+
 
     @ExceptionHandler(value = MethodArgumentTypeMismatchException.class)
     public ResponseEntity<Object> methodArgumentTypeMismatchException(MethodArgumentTypeMismatchException mismatchException) {
