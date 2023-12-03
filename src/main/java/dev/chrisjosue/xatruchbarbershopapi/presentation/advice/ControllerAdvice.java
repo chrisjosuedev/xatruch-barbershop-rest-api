@@ -3,10 +3,7 @@ package dev.chrisjosue.xatruchbarbershopapi.presentation.advice;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.builder.ApiBuilder;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.errors.ErrorToDtoMapper;
 import dev.chrisjosue.xatruchbarbershopapi.common.enums.Responses;
-import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.BusinessException;
-import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.ConflictException;
-import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.MethodNotAllowedException;
-import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.ResourceNotFoundException;
+import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.*;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.ErrorDetailResponseDto;
 import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
@@ -62,6 +59,12 @@ public class ControllerAdvice {
     public ResponseEntity<Object> resourceNotFoundException(ResourceNotFoundException resourceNotFoundException) {
         var errorDto = errorMapper.errorToDto(resourceNotFoundException.getField(), resourceNotFoundException.getMessage());
         return newErrorExceptionsResponse(List.of(errorDto), 404, "Error intentando encontrar el recurso.");
+    }
+
+    @ExceptionHandler(value = ForbiddenException.class)
+    public ResponseEntity<Object> forbiddenException(ForbiddenException forbiddenException) {
+        var errorDto = errorMapper.errorToDto(forbiddenException.getField(), forbiddenException.getMessage());
+        return newErrorExceptionsResponse(List.of(errorDto), 403, "Error intentando acceder el recurso.");
     }
 
     @ExceptionHandler(value = MethodNotAllowedException.class)

@@ -55,6 +55,7 @@ public class SettingFacadeImpl implements SettingFacade {
     @Override
     public void remove(Byte id) {
         var settingFound = settingService.findById(id);
+        settingCases.executeValidationToDelete(settingFound);
         settingService.remove(settingFound);
     }
 }

@@ -1,6 +1,7 @@
 package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.impl;
 
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.SettingCases;
+import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.MethodNotAllowedException;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.SettingRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.GlobalSetting;
 import lombok.RequiredArgsConstructor;
@@ -28,4 +29,14 @@ public class SettingCaseImpl implements SettingCases {
         globalSetting.setEndDailyAvailability(settingRequest.getEndDailyAvailability());
         return globalSetting;
     }
+
+    @Override
+    public void executeValidationToDelete(GlobalSetting globalSetting) {
+        if (globalSetting.getIsActive())
+            throw new MethodNotAllowedException(
+                    String.format("La configuración con id %s se encuentra activa.", globalSetting.getId()),
+                    "settings");
+    }
+
+
 }

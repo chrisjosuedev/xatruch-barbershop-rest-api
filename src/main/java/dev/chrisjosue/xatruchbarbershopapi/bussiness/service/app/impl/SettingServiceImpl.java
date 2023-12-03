@@ -17,7 +17,7 @@ public class SettingServiceImpl implements SettingService {
 
     @Override
     public GlobalSetting save(GlobalSetting globalSetting) {
-        /* If it is the first time */
+        /* If it's the first time */
         if (settingRepository.findAll().isEmpty()) globalSetting.setIsActive(true);
 
         var currentActiveSetting = settingRepository.findGlobalSettingByIsActiveIsTrue();
