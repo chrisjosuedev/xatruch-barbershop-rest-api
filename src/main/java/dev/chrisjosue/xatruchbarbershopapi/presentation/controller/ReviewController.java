@@ -29,7 +29,15 @@ public class ReviewController {
     @GetMapping
     public ResponseEntity<Object> findAll(@RequestParam(required = false, name = "approved") Boolean approved) {
         var allReviews = reviewFacade.findAll(approved);
-        return apiBuilder.build(201, "Listado de reseñas de clientes.", allReviews, Responses.DATA);
+        return apiBuilder.build(200, "Listado de reseñas de clientes.", allReviews, Responses.DATA);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    @GetMapping("/my-reviews")
+    public ResponseEntity<Object> findAllUserLogged(Principal principal) {
+        var userLogged = authenticationFacade.principalUser(principal);
+        var allUserReviews = reviewFacade.findUserReviews(userLogged.getId());
+        return apiBuilder.build(200, "Listado de reviews del usuario.", allUserReviews, Responses.DATA);
     }
 
     @PostMapping
@@ -62,6 +70,6 @@ public class ReviewController {
     public ResponseEntity<Object> remove(Principal principal, @PathVariable("id") Long id) {
         var userLogged = authenticationFacade.principalUser(principal);
         reviewFacade.remove(id, userLogged.getId());
-        return apiBuilder.build(201, "Review eliminada.", null, Responses.DATA);
+        return apiBuilder.build(200, "Review eliminada.", null, Responses.DATA);
     }
 }

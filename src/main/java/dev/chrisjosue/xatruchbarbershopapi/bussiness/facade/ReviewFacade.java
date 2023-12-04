@@ -12,4 +12,5 @@ public interface ReviewFacade {
     void remove(Long id, Long userId);
     List<ReviewDto> findAll(Boolean approved);
     List<ReviewDto> approveReviews(Set<Long> ids);
+    List<ReviewDto> findUserReviews(Long userId);
 }

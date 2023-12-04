@@ -56,4 +56,9 @@ public class ReviewServiceImpl implements ReviewService {
     public List<Review> findAllApprovedReviews() {
         return reviewRepository.findAllByIsApprovedIsTrue();
     }
+
+    @Override
+    public List<Review> findAllReviewsByUser(Long userId) {
+        return reviewRepository.findAllByUserId(userId);
+    }
 }

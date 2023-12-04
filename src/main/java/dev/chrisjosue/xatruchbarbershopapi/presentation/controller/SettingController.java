@@ -21,7 +21,7 @@ public class SettingController {
     @GetMapping
     public ResponseEntity<Object> findAll() {
         var settingList = settingFacade.findAll();
-        return apiBuilder.build(201, "Listado de configuración de horarios.", settingList, Responses.DATA);
+        return apiBuilder.build(200, "Listado de configuración de horarios.", settingList, Responses.DATA);
     }
 
     @PostMapping
@@ -33,18 +33,18 @@ public class SettingController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(@PathVariable("id") Byte id, @Valid @RequestBody SettingRequest settingRequest) {
         var settingUpdated = settingFacade.update(id, settingRequest);
-        return apiBuilder.build(201, "Configuración de horario actualizada.", settingUpdated, Responses.DATA);
+        return apiBuilder.build(200, "Configuración de horario actualizada.", settingUpdated, Responses.DATA);
     }
 
     @PostMapping("/active/{id}")
     public ResponseEntity<Object> active(@PathVariable("id") Byte id) {
         var settingActivated = settingFacade.active(id);
-        return apiBuilder.build(201, "Configuración de horario activada por default.", settingActivated, Responses.DATA);
+        return apiBuilder.build(200, "Configuración de horario activada por default.", settingActivated, Responses.DATA);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable("id") Byte id) {
         settingFacade.remove(id);
-        return apiBuilder.build(201, "Configuración de horario eliminado.", null, Responses.DATA);
+        return apiBuilder.build(200, "Configuración de horario eliminado.", null, Responses.DATA);
     }
 }

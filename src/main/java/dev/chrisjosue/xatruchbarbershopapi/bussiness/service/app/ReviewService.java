@@ -13,4 +13,5 @@ public interface ReviewService {
     List<Review> findAllById(List<Long> ids);
     void approveReviews(List<Review> reviews);
     List<Review> findAllApprovedReviews();
+    List<Review> findAllReviewsByUser(Long userId);
 }

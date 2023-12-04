@@ -8,7 +8,6 @@ import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.app.UserService;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.ReviewCases;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.ReviewRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.ReviewDto;
-import dev.chrisjosue.xatruchbarbershopapi.domain.entity.Review;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -82,6 +81,16 @@ public class ReviewFacadeImpl implements ReviewFacade {
         var approveReviews = reviewService.findAllApprovedReviews();
 
         return approveReviews
+                .stream()
+                .map(domainToReviewDtoMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<ReviewDto> findUserReviews(Long userId) {
+        var userFound = userService.findById(userId);
+        var userReviews = reviewService.findAllReviewsByUser(userFound.getId());
+        return userReviews
                 .stream()
                 .map(domainToReviewDtoMapper::toDto)
                 .toList();
