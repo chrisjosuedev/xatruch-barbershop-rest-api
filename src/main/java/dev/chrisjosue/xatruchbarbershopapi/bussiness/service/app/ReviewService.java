@@ -12,6 +12,5 @@ public interface ReviewService {
     List<Review> findAll(Boolean approved);
     List<Review> findAllById(List<Long> ids);
     void approveReviews(List<Review> reviews);
-
     List<Review> findAllApprovedReviews();
 }

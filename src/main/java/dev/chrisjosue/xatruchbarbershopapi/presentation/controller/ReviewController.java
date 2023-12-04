@@ -15,7 +15,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -29,7 +28,8 @@ public class ReviewController {
 
     @GetMapping
     public ResponseEntity<Object> findAll(@RequestParam(required = false, name = "approved") Boolean approved) {
-        return null;
+        var allReviews = reviewFacade.findAll(approved);
+        return apiBuilder.build(201, "Listado de reseñas de clientes.", allReviews, Responses.DATA);
     }
 
     @PostMapping
