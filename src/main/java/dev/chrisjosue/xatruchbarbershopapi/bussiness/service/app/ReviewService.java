@@ -10,5 +10,8 @@ public interface ReviewService {
     Review findById(Long id);
     void remove(Review review);
     List<Review> findAll(Boolean approved);
-    List<Review> approveReviews(List<Long> ids);
+    List<Review> findAllById(List<Long> ids);
+    void approveReviews(List<Review> reviews);
+
+    List<Review> findAllApprovedReviews();
 }

@@ -43,11 +43,17 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Review> approveReviews(List<Long> ids) {
-        /*
-         * TODO:
-         *  Approve reviews.
-         */
-        return null;
+    public List<Review> findAllById(List<Long> ids) {
+        return reviewRepository.findAllById(ids);
+    }
+
+    @Override
+    public void approveReviews(List<Review> reviews) {
+        reviewRepository.saveAll(reviews);
+    }
+
+    @Override
+    public List<Review> findAllApprovedReviews() {
+        return reviewRepository.findAllByIsApprovedIsTrue();
     }
 }

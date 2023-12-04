@@ -3,20 +3,25 @@ package dev.chrisjosue.xatruchbarbershopapi.presentation.controller;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.builder.ApiBuilder;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.AuthenticationFacade;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.ReviewFacade;
+import dev.chrisjosue.xatruchbarbershopapi.common.annotations.MaxSize;
 import dev.chrisjosue.xatruchbarbershopapi.common.enums.Responses;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.ReviewRequest;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/reviews")
 @RequiredArgsConstructor
+@Validated
 public class ReviewController {
     private final ReviewFacade reviewFacade;
     private final AuthenticationFacade authenticationFacade;
@@ -31,23 +36,25 @@ public class ReviewController {
     public ResponseEntity<Object> save(Principal principal, @Valid @RequestBody ReviewRequest reviewRequest) {
         var userLogged = authenticationFacade.principalUser(principal);
         var reviewSaved = reviewFacade.save(reviewRequest, userLogged.getId());
-        return apiBuilder.build(200, "Review creada.", reviewSaved, Responses.DATA);
+        return apiBuilder.build(201, "Review creada.", reviewSaved, Responses.DATA);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(Principal principal, @PathVariable("id") Long id, @Valid @RequestBody ReviewRequest reviewRequest) {
         var userLogged = authenticationFacade.principalUser(principal);
         var reviewUpdated = reviewFacade.update(id, reviewRequest, userLogged.getId());
-        return apiBuilder.build(201, "Review actualizada.", reviewUpdated, Responses.DATA);
+        return apiBuilder.build(200, "Review actualizada.", reviewUpdated, Responses.DATA);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/approve")
-    public ResponseEntity<Object> approveReviews(@RequestParam(name = "ids") List<Long> ids) {
-        /*
-        TODO: Approve Reviews (MAX 5)
-         */
-        return null;
+    public ResponseEntity<Object> approveReviews(
+            @RequestParam(name = "ids")
+            @NotEmpty(message = "Lista de elementos a aprovar requerida.")
+            @MaxSize(message = "Límite de reviews para aprovar es de 5.")
+            Set<Long> ids) {
+        var approvedReviews = reviewFacade.approveReviews(ids);
+        return apiBuilder.build(200, "Reviews aprovadas.", approvedReviews, Responses.DATA);
     }
 
 

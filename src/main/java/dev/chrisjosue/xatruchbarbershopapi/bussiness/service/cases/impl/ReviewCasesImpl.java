@@ -8,6 +8,13 @@ import dev.chrisjosue.xatruchbarbershopapi.domain.entity.Review;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
 
 @Component
 @RequiredArgsConstructor
@@ -34,6 +41,16 @@ public class ReviewCasesImpl implements ReviewCases {
         return review;
     }
 
+    @Override
+    public List<Review> setReviewsToApprove(List<Review> reviewsPending, List<Review> reviewsCurrent) {
+        // Get remaining Reviews to Change Approve to False;
+        reviewsCurrent.removeAll(reviewsPending);
+
+        reviewsCurrent.forEach(review -> review.setIsApproved(false));
+        reviewsPending.forEach(review -> review.setIsApproved(true));
+
+        return Stream.concat(reviewsPending.stream(), reviewsCurrent.stream()).toList();
+    }
     @Override
     public void executeValidationToDelete(Review review) {
         if (review.getIsApproved())

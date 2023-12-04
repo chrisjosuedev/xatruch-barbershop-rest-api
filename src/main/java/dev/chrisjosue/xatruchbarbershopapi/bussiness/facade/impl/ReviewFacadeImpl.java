@@ -8,10 +8,12 @@ import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.app.UserService;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.ReviewCases;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.ReviewRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.ReviewDto;
+import dev.chrisjosue.xatruchbarbershopapi.domain.entity.Review;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -67,10 +69,21 @@ public class ReviewFacadeImpl implements ReviewFacade {
     }
 
     @Override
-    public List<ReviewDto> approveReviews(List<Long> ids) {
-        /*
-        TODO: Approve List of Reviews
-         */
-        return null;
+    public List<ReviewDto> approveReviews(Set<Long> ids) {
+        List<Long> reviewIds = ids.stream().toList();
+        var toApproveReviews = reviewService.findAllById(reviewIds);
+        var currentApprovedReviews = reviewService.findAllApprovedReviews();
+
+        var setToApproveReviews = reviewCases.setReviewsToApprove(toApproveReviews, currentApprovedReviews);
+
+        reviewService.approveReviews(setToApproveReviews);
+
+        /* Get updated List */
+        var approveReviews = reviewService.findAllApprovedReviews();
+
+        return approveReviews
+                .stream()
+                .map(domainToReviewDtoMapper::toDto)
+                .toList();
     }
 }
