@@ -4,7 +4,7 @@ import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.BarberCases;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.BarberFacade;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.barber.DomainToPersonDto;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.barber.PersonRequestToDomainMapper;
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.app.BarberService;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.BarberService;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.PersonRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.PersonDto;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.Person;

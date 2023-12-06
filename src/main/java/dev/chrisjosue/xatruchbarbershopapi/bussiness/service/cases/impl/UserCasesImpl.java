@@ -21,6 +21,7 @@ public class UserCasesImpl implements UserCases {
 
     @Override
     public User setUserToSave(User user) {
+        user.setFullName(user.getFullName().trim());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setProfileUrl(DEFAULT_PROFILE_PICTURE);
         user.setRole(Role.USER);

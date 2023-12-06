@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 public class BarberCasesImpl implements BarberCases {
     @Override
     public Person setPersonToSave(Person person) {
+        person.setFullName(person.getFullName().trim());
         person.setIsBarber(true);
         person.setIsActive(true);
         return person;

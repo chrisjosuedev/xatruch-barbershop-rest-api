@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class SettingCaseImpl implements SettingCases {
+public class SettingCasesImpl implements SettingCases {
 
     @Override
     public GlobalSetting setSettingToSave(GlobalSetting globalSetting) {

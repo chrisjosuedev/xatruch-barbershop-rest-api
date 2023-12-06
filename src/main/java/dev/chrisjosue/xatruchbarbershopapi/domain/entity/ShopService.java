@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BarberService {
+public class ShopService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,9 +25,6 @@ public class BarberService {
     @Column(nullable = false)
     private Double price;
 
-    @Column(name = "is_published", nullable = false)
-    private Boolean isPublished;
-
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
 
@@ -36,5 +33,4 @@ public class BarberService {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "barberService")
     private List<BookingDetail> bookingDetails;
-
 }

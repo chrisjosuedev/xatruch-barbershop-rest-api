@@ -1,6 +1,6 @@
-package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.app.impl;
+package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.impl;
 
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.app.SettingService;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.SettingService;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.MethodNotAllowedException;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.ResourceNotFoundException;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.GlobalSetting;

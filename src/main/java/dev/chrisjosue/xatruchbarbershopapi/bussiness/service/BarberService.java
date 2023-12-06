@@ -1,4 +1,4 @@
-package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.app;
+package dev.chrisjosue.xatruchbarbershopapi.bussiness.service;
 
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.Person;
 import java.util.List;

@@ -3,7 +3,7 @@ package dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.impl;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.SettingFacade;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.setting.DomainToSettingDtoMapper;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.setting.SettingRequestToDomainMapper;
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.app.SettingService;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.SettingService;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.SettingCases;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.SettingRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.SettingDto;
