@@ -24,5 +24,5 @@ public class BookingDetail {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "service_id")
-    private ShopService shopService;
+    private ShopService barberService;
 }

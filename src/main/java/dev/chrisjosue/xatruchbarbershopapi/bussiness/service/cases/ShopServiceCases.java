@@ -7,4 +7,5 @@ public interface ShopServiceCases {
     ShopService setToSaveShopService(ShopService shopService);
     ShopService setToUpdateShopService(ShopService shopService, ShopServiceRequest shopServiceRequest);
     ShopService executeSetToDeleteShopService(ShopService shopService);
+    ShopService executeSetToDiscontinueShopService(ShopService shopServiceFound);
 }

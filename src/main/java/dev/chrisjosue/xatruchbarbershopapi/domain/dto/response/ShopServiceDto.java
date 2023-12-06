@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShopServiceDto {
+    private Long id;
     private String serviceName;
     private Double price;
+    private Boolean isActive;
 }

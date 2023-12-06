@@ -49,7 +49,13 @@ public class ShopServiceServiceImpl implements ShopServiceService {
 
     @Override
     public void remove(ShopService barberService) {
-        shopServiceRepository.save(barberService);
+        shopServiceRepository.delete(barberService);
+    }
+
+    @Override
+    public boolean discontinueService(ShopService barberService) {
+        var serviceDiscontinue = shopServiceRepository.save(barberService);
+        return serviceDiscontinue.getIsActive();
     }
 
     @Override
@@ -61,5 +67,12 @@ public class ShopServiceServiceImpl implements ShopServiceService {
     @Override
     public List<ShopService> findAll() {
         return shopServiceRepository.findAllByIsActiveIsTrue();
+    }
+
+    @Override
+    public ShopService findByIdIncludeAll(Long id) {
+        return shopServiceRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Servicio con id %s no existe.", id), "id"));
+
     }
 }

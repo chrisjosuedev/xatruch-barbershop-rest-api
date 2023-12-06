@@ -29,4 +29,13 @@ public class ShopServiceCasesImpl implements ShopServiceCases {
         shopService.setIsActive(false);
         return shopService;
     }
+
+    @Override
+    public ShopService executeSetToDiscontinueShopService(ShopService shopService) {
+        if (!shopService.getBookingTempCarts().isEmpty())
+            throw new MethodNotAllowedException("No es posible eliminar el servicio ya que afecta la integridad de los datos.", "service");
+
+        shopService.setIsActive(!shopService.getIsActive());
+        return shopService;
+    }
 }

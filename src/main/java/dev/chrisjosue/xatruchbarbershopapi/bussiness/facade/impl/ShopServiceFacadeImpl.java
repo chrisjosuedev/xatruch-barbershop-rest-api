@@ -44,6 +44,13 @@ public class ShopServiceFacadeImpl implements ShopServiceFacade {
     }
 
     @Override
+    public boolean discontinue(Long id) {
+        var shopServiceFound = shopService.findByIdIncludeAll(id);
+        var shopServiceSet = shopServiceCases.executeSetToDiscontinueShopService(shopServiceFound);
+        return shopService.discontinueService(shopServiceSet);
+    }
+
+    @Override
     public List<ShopServiceDto> findAll() {
         return shopService.findAll()
                 .stream()

@@ -21,5 +21,5 @@ public class BookingTempCart {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "service_id")
-    private ShopService shopService;
+    private ShopService barberService;
 }

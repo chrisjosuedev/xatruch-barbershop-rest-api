@@ -9,6 +9,7 @@ public interface ShopServiceFacade {
     ShopServiceDto save(ShopServiceRequest shopServiceRequest);
     ShopServiceDto update(ShopServiceRequest shopServiceRequest, Long id);
     void remove(Long id);
+    boolean discontinue(Long id);
     List<ShopServiceDto> findAll();
     ShopServiceDto findById(Long id);
 }
