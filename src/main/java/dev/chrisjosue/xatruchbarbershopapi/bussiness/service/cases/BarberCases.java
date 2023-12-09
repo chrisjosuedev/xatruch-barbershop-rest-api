@@ -5,7 +5,6 @@ import dev.chrisjosue.xatruchbarbershopapi.domain.entity.Person;
 
 public interface BarberCases {
     Person setPersonToSave(Person person);
-
     Person setPersonToUpdate(Person barberFound, PersonRequest personRequest);
     Person setPersonToDelete(Person barberFound);
 }
