@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
@@ -17,4 +18,12 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     WHERE p.isBarber = true AND p.id = :personId AND b.bookingDate = :bookingDate
     """)
     List<LocalTime> findAllByPersonIdAndBookingDate(Long personId, Date bookingDate);
+
+    @Query("""
+    SELECT b.bookingTime FROM Booking b
+    INNER JOIN Person p on b.person.id = p.id
+    WHERE p.isBarber = true\s
+    AND p.id = :personId AND b.bookingDate = :bookingDate AND b.bookingTime = :bookingTime
+    """)
+    Optional<Booking> findBookingAvailability(Long personId, Date bookingDate, LocalTime bookingTime);
 }

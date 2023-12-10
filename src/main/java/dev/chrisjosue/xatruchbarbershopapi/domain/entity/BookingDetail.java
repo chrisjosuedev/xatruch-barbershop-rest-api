@@ -16,7 +16,6 @@ public class BookingDetail {
     private Long id;
 
     private Double price;
-    private Double subtotal;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "booking_id")

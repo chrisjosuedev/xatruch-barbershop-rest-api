@@ -52,25 +52,31 @@ public class ControllerAdvice {
     @ExceptionHandler(value = ConflictException.class)
     public ResponseEntity<Object> conflictException(ConflictException conflictException) {
         var errorDto = errorMapper.errorToDto(conflictException.getField(), conflictException.getMessage());
-        return newErrorExceptionsResponse(List.of(errorDto), 409, "Conflictos en el recurso.");
+        return newErrorExceptionsResponse(List.of(errorDto), conflictException.getHttpStatus().value(), "Conflictos en el recurso.");
+    }
+
+    @ExceptionHandler(value = BadRequestException.class)
+    public ResponseEntity<Object> badRequestException(BadRequestException badRequestException) {
+        var errorDto = errorMapper.errorToDto(badRequestException.getField(), badRequestException.getMessage());
+        return newErrorExceptionsResponse(List.of(errorDto), badRequestException.getHttpStatus().value(), "Error en el procesamiento.");
     }
 
     @ExceptionHandler(value = ResourceNotFoundException.class)
     public ResponseEntity<Object> resourceNotFoundException(ResourceNotFoundException resourceNotFoundException) {
         var errorDto = errorMapper.errorToDto(resourceNotFoundException.getField(), resourceNotFoundException.getMessage());
-        return newErrorExceptionsResponse(List.of(errorDto), 404, "Error intentando encontrar el recurso.");
+        return newErrorExceptionsResponse(List.of(errorDto), resourceNotFoundException.getHttpStatus().value(), "Error intentando encontrar el recurso.");
     }
 
     @ExceptionHandler(value = ForbiddenException.class)
     public ResponseEntity<Object> forbiddenException(ForbiddenException forbiddenException) {
         var errorDto = errorMapper.errorToDto(forbiddenException.getField(), forbiddenException.getMessage());
-        return newErrorExceptionsResponse(List.of(errorDto), 403, "Error intentando acceder el recurso.");
+        return newErrorExceptionsResponse(List.of(errorDto), forbiddenException.getHttpStatus().value(), "Error intentando acceder el recurso.");
     }
 
     @ExceptionHandler(value = MethodNotAllowedException.class)
     public ResponseEntity<Object> methodNotAllowedException(MethodNotAllowedException methodNotAllowedException) {
         var errorDto = errorMapper.errorToDto(methodNotAllowedException.getField(), methodNotAllowedException.getMessage());
-        return newErrorExceptionsResponse(List.of(errorDto), 405, "Error al intentar realizar petición.");
+        return newErrorExceptionsResponse(List.of(errorDto), methodNotAllowedException.getHttpStatus().value(), "Error al intentar realizar petición.");
     }
 
     @ExceptionHandler(value = BadCredentialsException.class)

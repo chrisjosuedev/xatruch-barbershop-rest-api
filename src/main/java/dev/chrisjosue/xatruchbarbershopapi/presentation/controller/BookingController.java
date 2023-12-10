@@ -4,6 +4,8 @@ import dev.chrisjosue.xatruchbarbershopapi.bussiness.builder.ApiBuilder;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.AuthenticationFacade;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.BookingFacade;
 import dev.chrisjosue.xatruchbarbershopapi.common.enums.Responses;
+import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.BookingRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -25,21 +27,21 @@ public class BookingController {
     @GetMapping("/availability")
     public ResponseEntity<Object> findAvailability(
             @RequestParam(name = "barberId") Long barberId,
-            @RequestParam(name = "date") @DateTimeFormat(pattern = "dd-MM-yyyy") Date date) {
+            @RequestParam(name = "date")
+            @DateTimeFormat(pattern = "dd-MM-yyyy")
+            Date date) {
         var availableTime = bookingFacade.findAvailability(barberId, date);
         return apiBuilder.build(200, String.format("Listado de horas disponibles para barbero con id %s", barberId),
                 availableTime, Responses.DATA);
     }
 
     @PostMapping
-    public ResponseEntity<Object> findAvailability(Principal principal) {
+    public ResponseEntity<Object> saveOrder(Principal principal, @Valid @RequestBody BookingRequest bookingRequest) {
         var userLogged = authenticationFacade.principalUser(principal);
-        /**
-         * Facade parse any time to a round time:
-         * EX -> 18:32:93 to 18:00:00
-         */
+        var serviceBooked = bookingFacade.bookingASession(bookingRequest, userLogged.getId());
+
         return apiBuilder.build(201, "Session Booked.",
-                null, Responses.DATA);
+                serviceBooked, Responses.DATA);
     }
 
 }

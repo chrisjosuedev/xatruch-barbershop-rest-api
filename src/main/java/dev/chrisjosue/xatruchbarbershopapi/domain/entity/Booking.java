@@ -35,6 +35,6 @@ public class Booking {
     @JoinColumn(name = "barber_id")
     private Person person;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "booking")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "booking", cascade = CascadeType.ALL)
     private List<BookingDetail> bookingDetails;
 }
