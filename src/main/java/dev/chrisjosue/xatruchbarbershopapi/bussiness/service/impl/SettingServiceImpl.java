@@ -8,6 +8,8 @@ import dev.chrisjosue.xatruchbarbershopapi.persistance.SettingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -51,6 +53,13 @@ public class SettingServiceImpl implements SettingService {
     }
 
     @Override
+    public GlobalSetting findActiveSetting() {
+        return settingRepository
+                .findGlobalSettingByIsActiveIsTrue()
+                .orElseThrow(() -> new ResourceNotFoundException("Configuración de horario requerida.", "settings"));
+    }
+
+    @Override
     public void remove(GlobalSetting globalSetting) {
         var currentSettingsAvailable = settingRepository.findAll();
 
@@ -65,5 +74,18 @@ public class SettingServiceImpl implements SettingService {
     @Override
     public List<GlobalSetting> findAll() {
         return settingRepository.findAll();
+    }
+
+    @Override
+    public List<LocalTime> findActiveHours() {
+        var activeSetting = findActiveSetting();
+        List<LocalTime> activeHours = new LinkedList<>();
+        var startTime = activeSetting.getStartDailyAvailability();
+        var endTime = activeSetting.getEndDailyAvailability();
+        while (startTime.isBefore(endTime) || startTime.equals(endTime)) {
+            activeHours.add(startTime);
+            startTime = startTime.plusHours(1);
+        }
+        return activeHours;
     }
 }

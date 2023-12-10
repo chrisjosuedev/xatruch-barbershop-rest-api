@@ -7,6 +7,10 @@ import dev.chrisjosue.xatruchbarbershopapi.domain.entity.GlobalSetting;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalTime;
+import java.util.LinkedList;
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class SettingCasesImpl implements SettingCases {
@@ -37,6 +41,4 @@ public class SettingCasesImpl implements SettingCases {
                     String.format("La configuración con id %s se encuentra activa.", globalSetting.getId()),
                     "settings");
     }
-
-
 }

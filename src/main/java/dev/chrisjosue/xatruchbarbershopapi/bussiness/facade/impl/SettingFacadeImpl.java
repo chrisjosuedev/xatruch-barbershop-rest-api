@@ -10,6 +10,7 @@ import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.SettingDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Service

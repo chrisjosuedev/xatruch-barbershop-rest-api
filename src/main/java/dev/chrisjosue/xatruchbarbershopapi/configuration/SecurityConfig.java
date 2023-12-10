@@ -33,6 +33,8 @@ public class SecurityConfig {
                         .requestMatchers("/auth/forgot-password/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/services/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/reviews/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/barbers/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/bookings/orders/availability/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

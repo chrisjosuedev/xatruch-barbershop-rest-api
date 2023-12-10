@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +21,11 @@ public class Booking {
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Date date;
+    private Date bookingDate;
+
+    @Temporal(TemporalType.TIME)
+    @Column(nullable = false)
+    private LocalTime bookingTime;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")
