@@ -26,4 +26,6 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     AND p.id = :personId AND b.bookingDate = :bookingDate AND b.bookingTime = :bookingTime
     """)
     Optional<Booking> findBookingAvailability(Long personId, Date bookingDate, LocalTime bookingTime);
+
+    List<Booking> findAllByUserId(Long userId);
 }

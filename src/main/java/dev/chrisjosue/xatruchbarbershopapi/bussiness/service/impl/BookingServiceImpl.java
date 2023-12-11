@@ -1,23 +1,18 @@
 package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.impl;
 
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.BookingService;
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.SettingService;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.*;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.Booking;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.BookingDetail;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.BookingTempCart;
-import dev.chrisjosue.xatruchbarbershopapi.domain.entity.User;
 import dev.chrisjosue.xatruchbarbershopapi.persistance.BookingCartRepository;
-import dev.chrisjosue.xatruchbarbershopapi.persistance.BookingDetailsRepository;
 import dev.chrisjosue.xatruchbarbershopapi.persistance.BookingRepository;
-import dev.chrisjosue.xatruchbarbershopapi.persistance.SettingRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -70,5 +65,14 @@ public class BookingServiceImpl implements BookingService {
         return bookingSaved;
     }
 
+    @Override
+    public List<Booking> findAll() {
+        return bookingRepository.findAll();
+    }
+
+    @Override
+    public List<Booking> findAllUserBookings(Long userId) {
+        return bookingRepository.findAllByUserId(userId);
+    }
 
 }

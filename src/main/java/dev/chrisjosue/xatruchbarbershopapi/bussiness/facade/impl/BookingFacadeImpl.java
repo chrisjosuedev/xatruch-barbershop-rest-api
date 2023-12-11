@@ -3,10 +3,13 @@ package dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.impl;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.BookingFacade;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.booking.BookingRequestToDomainMapper;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.booking.DomainToBookingDtoMapper;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.booking.DomainToBookingGeneralDtoMapper;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.*;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.BookingCases;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.BookingRequest;
+import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.BookingDetailDto;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.BookingDto;
+import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.BookingGeneralDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookingFacadeImpl implements BookingFacade {
     private final BookingService bookingService;
+    private final BookingDetailService bookingDetailService;
     private final BookingCartService bookingCartService;
     private final BarberService barberService;
     private final UserService userService;
@@ -25,6 +29,7 @@ public class BookingFacadeImpl implements BookingFacade {
     private final BookingCases bookingCases;
     private final BookingRequestToDomainMapper bookingRequestToDomainMapper;
     private final DomainToBookingDtoMapper domainToBookingDtoMapper;
+    private final DomainToBookingGeneralDtoMapper domainToBookingGeneralDtoMapper;
 
     @Override
     public List<LocalTime> findAvailability(Long barberId, Date date) {
@@ -49,4 +54,39 @@ public class BookingFacadeImpl implements BookingFacade {
         // Map to bookingDto
         return domainToBookingDtoMapper.toDto(bookSaved);
     }
+
+    @Override
+    public List<BookingGeneralDto> findAllBookings() {
+        return bookingService.findAll()
+                .stream()
+                .map(domainToBookingGeneralDtoMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<BookingGeneralDto> findAllBookingsByUser(Long userId) {
+        var userFound = userService.findById(userId);
+        return bookingService.findAllUserBookings(userFound.getId())
+                .stream()
+                .map(domainToBookingGeneralDtoMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<BookingDetailDto> findBookingById(Long bookingId) {
+        return bookingDetailService.findAllBookingDetailById(bookingId)
+                .stream()
+                .map(domainToBookingDtoMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<BookingDetailDto> findBookingUserById(Long bookingId, Long userId) {
+        var userFound = userService.findById(userId);
+        return bookingDetailService.findAllBookingDetailByUser(userFound.getId(), bookingId)
+                .stream()
+                .map(domainToBookingDtoMapper::toDto)
+                .toList();
+    }
+
 }
