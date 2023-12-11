@@ -4,6 +4,7 @@ import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.AuthenticationFacade
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.auth.AuthenticationResponseMapper;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.user.DomainToUserDtoMapper;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.AuthenticationService;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.EmailService;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.UserService;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.AuthenticationDtoResponse;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.TokenDto;
@@ -23,6 +24,7 @@ import java.security.Principal;
 public class AuthenticationFacadeImpl implements AuthenticationFacade {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final EmailService emailService;
     private final AuthenticationService authenticationService;
     private final UserService userService;
     private final AuthenticationResponseMapper authenticationResponseMapper;
@@ -44,6 +46,13 @@ public class AuthenticationFacadeImpl implements AuthenticationFacade {
     public UserDto principalUser(Principal principal) {
         var userLogged = authenticationService.getUserLoggedIn(principal);
         return domainToUserDtoMapper.toDto(userLogged);
+    }
+
+    @Override
+    public void requestForgotPassword(String email) {
+        var userFound = userService.findUserByEmail(email);
+        String jwtRecoveryToken = jwtService.generateToken(userFound);
+        emailService.sendRecoveryPasswordEmail(userFound, jwtRecoveryToken);
     }
 
     @Override

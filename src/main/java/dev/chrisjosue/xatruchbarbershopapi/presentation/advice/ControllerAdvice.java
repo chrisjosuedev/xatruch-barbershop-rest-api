@@ -55,6 +55,12 @@ public class ControllerAdvice {
         return newErrorExceptionsResponse(List.of(errorDto), conflictException.getHttpStatus().value(), "Conflictos en el recurso.");
     }
 
+    @ExceptionHandler(value = InternalServerException.class)
+    public ResponseEntity<Object> conflictException(InternalServerException internalServerException) {
+        var errorDto = errorMapper.errorToDto(internalServerException.getField(), internalServerException.getMessage());
+        return newErrorExceptionsResponse(List.of(errorDto), internalServerException.getHttpStatus().value(), "Conflictos en el recurso.");
+    }
+
     @ExceptionHandler(value = BadRequestException.class)
     public ResponseEntity<Object> badRequestException(BadRequestException badRequestException) {
         var errorDto = errorMapper.errorToDto(badRequestException.getField(), badRequestException.getMessage());

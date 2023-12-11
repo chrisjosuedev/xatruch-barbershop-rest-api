@@ -13,4 +13,9 @@ public interface AuthenticationFacade {
     AuthenticationDtoResponse renewTokenWithUpdatedUser(String username);
     TokenDto refreshToken(Principal principal);
     UserDto principalUser(Principal principal);
+    void requestForgotPassword(String email);
+    /*
+    TODO:
+    recoveryPassword, check Token if is still valid, change password and return UserDTO
+     */
 }

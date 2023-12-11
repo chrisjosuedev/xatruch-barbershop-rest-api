@@ -1,7 +1,7 @@
 server:
-    port: 9090
-    servlet:
-      context-path: /api
+  port: 9090
+  servlet:
+    context-path: /api
 
 spring:
   datasource:
@@ -10,8 +10,22 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  mail:
+    default-encoding: UTF-8
+    host: smtp.office365.com
+    port: 587
+    username: ${OUTLOOK_EMAIL}
+    password: ${OUTLOOK_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    protocol: smtp
+    test-connection: false
   profiles:
     active: dev
 
 values:
-  DEFAULT_PROFILE_PICTURE: "https://res.cloudinary.com/def8hdamv/image/upload/v1701453504/barber-app/qnnolu3m8se0zqe5rilq.png"
+  DEFAULT_PROFILE_PICTURE: https://res.cloudinary.com/def8hdamv/image/upload/v1701453504/barber-app/qnnolu3m8se0zqe5rilq.png
