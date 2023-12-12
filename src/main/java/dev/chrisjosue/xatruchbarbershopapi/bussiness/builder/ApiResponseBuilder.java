@@ -23,9 +23,9 @@ public class ApiResponseBuilder implements ApiBuilder {
         customResponse.put("httpStatusCode", httpStatus.value());
         customResponse.put("message", message);
 
-        if (object == null) object = Collections.emptyList();
-        customResponse.put(responses.getType(), object);
+        if (object == null) return new ResponseEntity<>(customResponse, httpStatus);
 
+        customResponse.put(responses.getType(), object);
         return new ResponseEntity<>(customResponse, httpStatus);
     }
 

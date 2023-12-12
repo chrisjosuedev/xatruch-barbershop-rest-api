@@ -1,5 +1,6 @@
 package dev.chrisjosue.xatruchbarbershopapi.bussiness.facade;
 
+import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.ForgotPasswordRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.AuthenticationDtoResponse;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.TokenDto;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.UserDto;
@@ -14,8 +15,6 @@ public interface AuthenticationFacade {
     TokenDto refreshToken(Principal principal);
     UserDto principalUser(Principal principal);
     void requestForgotPassword(String email);
-    /*
-    TODO:
-    recoveryPassword, check Token if is still valid, change password and return UserDTO
-     */
+    void recoveryPassword(String token, ForgotPasswordRequest forgotPasswordRequest);
+
 }

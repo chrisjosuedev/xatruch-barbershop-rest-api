@@ -3,6 +3,7 @@ package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.impl;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.UserCases;
 import dev.chrisjosue.xatruchbarbershopapi.common.enums.Role;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.BusinessException;
+import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.ForgotPasswordRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.PasswordUpdateRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.UserUpdateRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.User;
@@ -45,6 +46,12 @@ public class UserCasesImpl implements UserCases {
         if (!passwordMatch) throw new BusinessException("Contraseña actual incorrecta.", "confirmPassword");
 
         user.setPassword(passwordEncoder.encode(passwordUpdateRequest.getNewPassword()));
+        return user;
+    }
+
+    @Override
+    public User setUserToUpdatePassword(ForgotPasswordRequest forgotPasswordRequest, User user) {
+        user.setPassword(passwordEncoder.encode(forgotPasswordRequest.getNewPassword()));
         return user;
     }
 

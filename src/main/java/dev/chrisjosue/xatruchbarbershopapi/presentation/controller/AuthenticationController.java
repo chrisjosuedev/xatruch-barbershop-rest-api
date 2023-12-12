@@ -4,11 +4,11 @@ import dev.chrisjosue.xatruchbarbershopapi.bussiness.builder.ApiBuilder;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.AuthenticationFacade;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.UserFacade;
 import dev.chrisjosue.xatruchbarbershopapi.common.enums.Responses;
+import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.ForgotPasswordRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.LoginRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.UserRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -69,6 +69,20 @@ public class AuthenticationController {
                 200,
                 "Usuario logeado con éxito.",
                 authenticatedUser,
+                Responses.DATA
+        );
+    }
+
+    @PutMapping("/forgot-password/recovery")
+    public ResponseEntity<Object> recoveryPassword(
+            @RequestParam("token")
+            String token, @Valid @RequestBody ForgotPasswordRequest forgotPasswordRequest) {
+        authenticationFacade.recoveryPassword(token, forgotPasswordRequest);
+
+        return apiBuilder.build(
+                200,
+                "Contraseña fue actualizada exitosamente.",
+                null,
                 Responses.DATA
         );
     }

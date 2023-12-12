@@ -1,7 +1,10 @@
 package dev.chrisjosue.xatruchbarbershopapi.security.impl;
 
+import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.InternalServerException;
+import dev.chrisjosue.xatruchbarbershopapi.domain.entity.User;
 import dev.chrisjosue.xatruchbarbershopapi.security.JwtService;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -10,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import java.security.Key;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -18,10 +20,24 @@ import java.util.function.Function;
 
 @Service
 public class JwtServiceImpl implements JwtService {
+
     private static final int MINUTES = 15;
 
     @Value("${SECRET_KEY}")
     private String secretKey;
+
+    @Override
+    public Claims verifyJws(String jwt) {
+        try {
+            return Jwts.parser()
+                    .verifyWith(getSignInKey())
+                    .build()
+                    .parseSignedClaims(jwt)
+                    .getPayload();
+        } catch (JwtException jwtException) {
+            throw new InternalServerException(jwtException.getMessage(), "token");
+        }
+    }
 
     @Override
     public boolean isValidToken(String jwt, UserDetails userDetails) {

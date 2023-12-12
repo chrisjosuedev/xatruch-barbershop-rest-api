@@ -6,6 +6,8 @@ import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.user.DomainToUserDto
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.AuthenticationService;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.EmailService;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.UserService;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.UserCases;
+import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.ForgotPasswordRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.AuthenticationDtoResponse;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.TokenDto;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.UserDto;
@@ -27,6 +29,7 @@ public class AuthenticationFacadeImpl implements AuthenticationFacade {
     private final EmailService emailService;
     private final AuthenticationService authenticationService;
     private final UserService userService;
+    private final UserCases userCases;
     private final AuthenticationResponseMapper authenticationResponseMapper;
     private final DomainToUserDtoMapper domainToUserDtoMapper;
 
@@ -53,6 +56,15 @@ public class AuthenticationFacadeImpl implements AuthenticationFacade {
         var userFound = userService.findUserByEmail(email);
         String jwtRecoveryToken = jwtService.generateToken(userFound);
         emailService.sendRecoveryPasswordEmail(userFound, jwtRecoveryToken);
+    }
+
+    @Override
+    public void recoveryPassword(String token, ForgotPasswordRequest forgotPasswordRequest) {
+        var verifyJwt = jwtService.verifyJws(token);
+        var userSubject = verifyJwt.getSubject();
+        var userFound = userService.findUserByEmail(userSubject);
+        var setUser = userCases.setUserToUpdatePassword(forgotPasswordRequest, userFound);
+        userService.update(setUser);
     }
 
     @Override
