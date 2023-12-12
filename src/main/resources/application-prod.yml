@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: ""
+    username: ""
+    password: ""
+
+clients:
+    CLIENT_SERVER: ""
+    CLIENT_SERVER_FORGOT_PASSWORD_URI: ""
