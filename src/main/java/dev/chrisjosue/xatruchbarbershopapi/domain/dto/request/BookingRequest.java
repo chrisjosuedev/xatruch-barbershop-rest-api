@@ -20,7 +20,6 @@ public class BookingRequest {
     private LocalDate bookingDate;
 
     @NotNull(message = "Hora de sesión es requerida.")
-    @FutureOrPresent(message = "Hora no puede ser anterior a la actual.")
     @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime bookingTime;
 

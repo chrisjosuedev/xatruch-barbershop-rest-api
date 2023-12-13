@@ -26,6 +26,7 @@ public class BookingFacadeImpl implements BookingFacade {
     private final BarberService barberService;
     private final UserService userService;
     private final SettingService settingService;
+    private final EmailService emailService;
     private final BookingCases bookingCases;
     private final BookingRequestToDomainMapper bookingRequestToDomainMapper;
     private final DomainToBookingDtoMapper domainToBookingDtoMapper;
@@ -50,6 +51,9 @@ public class BookingFacadeImpl implements BookingFacade {
         /* Finding Booked Services by User to Add to BookingDetails */
         var currentCart = bookingCartService.findAll(userLogged.getId());
         var bookSaved = bookingService.bookingSession(bookingSet, currentCart);
+
+        /* Send Email with Detail */
+        emailService.sendBookingEmail(bookSaved);
 
         // Map to bookingDto
         return domainToBookingDtoMapper.toDto(bookSaved);

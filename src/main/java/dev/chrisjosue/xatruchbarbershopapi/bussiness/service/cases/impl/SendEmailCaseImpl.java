@@ -1,6 +1,7 @@
 package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.impl;
 
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.SendEmailCase;
+import dev.chrisjosue.xatruchbarbershopapi.common.enums.Templates;
 import dev.chrisjosue.xatruchbarbershopapi.domain.pojo.Mail;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -21,7 +22,7 @@ public class SendEmailCaseImpl implements SendEmailCase {
     private final SpringTemplateEngine templateEngine;
 
     @Override
-    public void sendSimpleEmail(Mail mail) throws MessagingException, IOException {
+    public void sendTemplateEmail(Mail mail, Templates template) throws MessagingException, IOException {
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message,
                 MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
@@ -29,7 +30,7 @@ public class SendEmailCaseImpl implements SendEmailCase {
 
         Context context = new Context();
         context.setVariables(mail.getModel());
-        String html = templateEngine.process("email-template", context);
+        String html = templateEngine.process(template.getFile(), context);
 
         helper.setTo(mail.getTo());
         helper.setText(html, true);
