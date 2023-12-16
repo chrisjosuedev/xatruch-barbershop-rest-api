@@ -4,13 +4,12 @@ import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.SettingFacade;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.setting.DomainToSettingDtoMapper;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.setting.SettingRequestToDomainMapper;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.SettingService;
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.SettingCases;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.SettingCases;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.SettingRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.SettingDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
 import java.util.List;
 
 @Service

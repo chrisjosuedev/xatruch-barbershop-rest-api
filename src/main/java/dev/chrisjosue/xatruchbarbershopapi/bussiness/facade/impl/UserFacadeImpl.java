@@ -1,16 +1,21 @@
 package dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.impl;
 
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.user.DomainToUserDtoMapper;
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.UserCases;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.UserCases;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.UserFacade;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.user.UserRequestToDomainMapper;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.UserService;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.impl.UserServiceImpl;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.PasswordUpdateRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.UserRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.UserUpdateRequest;
+import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.ImageDto;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.UserDto;
+import dev.chrisjosue.xatruchbarbershopapi.storage.LocalStorage;
+import dev.chrisjosue.xatruchbarbershopapi.storage.StorageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -45,5 +50,13 @@ public class UserFacadeImpl implements UserFacade {
         var userToUpdate = userService.findById(id);
         var userSet = userCases.setUserToUpdatePassword(passwordUpdateRequest, userToUpdate);
         userService.update(userSet);
+    }
+
+    @Override
+    public UserDto updateProfilePicture(String url, Long id) {
+        var userToUpdate = userService.findById(id);
+        var userSet = userCases.setUserToUpdateProfilePicture(url, userToUpdate);
+        var userUpdated = userService.update(userSet);
+        return domainToUserDtoMapper.toDto(userUpdated);
     }
 }

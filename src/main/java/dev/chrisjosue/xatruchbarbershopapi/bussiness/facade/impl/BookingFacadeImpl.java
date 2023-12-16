@@ -5,7 +5,7 @@ import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.booking.BookingReque
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.booking.DomainToBookingDtoMapper;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.booking.DomainToBookingGeneralDtoMapper;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.*;
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.BookingCases;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.BookingCases;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.BookingRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.BookingDetailDto;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.BookingDto;

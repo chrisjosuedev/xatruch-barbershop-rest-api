@@ -1,6 +1,6 @@
-package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.impl;
+package dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.impl;
 
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.BarberCases;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.BarberCases;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.PersonRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.Person;
 import lombok.RequiredArgsConstructor;

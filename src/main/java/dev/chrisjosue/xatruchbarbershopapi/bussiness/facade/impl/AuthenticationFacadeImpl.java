@@ -6,7 +6,7 @@ import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.user.DomainToUserDto
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.AuthenticationService;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.EmailService;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.UserService;
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.UserCases;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.UserCases;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.ForgotPasswordRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.AuthenticationDtoResponse;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.TokenDto;

@@ -1,6 +1,6 @@
-package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.impl;
+package dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.impl;
 
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.UserCases;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.UserCases;
 import dev.chrisjosue.xatruchbarbershopapi.common.enums.Role;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.BusinessException;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.ForgotPasswordRequest;
@@ -52,6 +52,12 @@ public class UserCasesImpl implements UserCases {
     @Override
     public User setUserToUpdatePassword(ForgotPasswordRequest forgotPasswordRequest, User user) {
         user.setPassword(passwordEncoder.encode(forgotPasswordRequest.getNewPassword()));
+        return user;
+    }
+
+    @Override
+    public User setUserToUpdateProfilePicture(String url, User user) {
+        user.setProfileUrl(url);
         return user;
     }
 

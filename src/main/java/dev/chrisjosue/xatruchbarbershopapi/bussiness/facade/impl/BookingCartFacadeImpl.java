@@ -5,7 +5,7 @@ import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.bookingcart.DomainTo
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.BookingCartService;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.ShopServiceService;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.UserService;
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.BookingCartCases;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.BookingCartCases;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.BookingCartDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

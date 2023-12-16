@@ -1,4 +1,4 @@
-package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases;
+package dev.chrisjosue.xatruchbarbershopapi.bussiness.cases;
 
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.ForgotPasswordRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.PasswordUpdateRequest;
@@ -10,4 +10,5 @@ public interface UserCases {
     User setUserToUpdate(UserUpdateRequest userUpdateRequest, User user);
     User setUserToUpdatePassword(PasswordUpdateRequest passwordUpdateRequest, User user);
     User setUserToUpdatePassword(ForgotPasswordRequest forgotPasswordRequest, User user);
+    User setUserToUpdateProfilePicture(String url, User user);
 }

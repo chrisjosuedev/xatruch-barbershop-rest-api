@@ -5,7 +5,7 @@ import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.review.DomainToRevie
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.review.ReviewRequestToDomainMapper;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.ReviewService;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.UserService;
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.ReviewCases;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.ReviewCases;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.ReviewRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.ReviewDto;
 import lombok.RequiredArgsConstructor;

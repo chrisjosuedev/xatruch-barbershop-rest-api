@@ -1,13 +1,11 @@
-package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.impl;
+package dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.impl;
 
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.BookingCartCases;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.BookingCartCases;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.ConflictException;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.BookingTempCart;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.ShopService;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.User;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 public class BookingCartCasesImpl implements BookingCartCases {

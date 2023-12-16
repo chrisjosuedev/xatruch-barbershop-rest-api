@@ -1,6 +1,6 @@
-package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.impl;
+package dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.impl;
 
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.SendEmailCase;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.SendEmailCase;
 import dev.chrisjosue.xatruchbarbershopapi.common.enums.Templates;
 import dev.chrisjosue.xatruchbarbershopapi.domain.pojo.Mail;
 import jakarta.mail.MessagingException;

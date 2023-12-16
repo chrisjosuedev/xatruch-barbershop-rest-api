@@ -1,6 +1,6 @@
 package dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.impl;
 
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.BarberCases;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.BarberCases;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.BarberFacade;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.barber.DomainToPersonDto;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.barber.PersonRequestToDomainMapper;

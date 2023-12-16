@@ -1,4 +1,4 @@
-package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases;
+package dev.chrisjosue.xatruchbarbershopapi.bussiness.cases;
 
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.ShopServiceRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.ShopService;

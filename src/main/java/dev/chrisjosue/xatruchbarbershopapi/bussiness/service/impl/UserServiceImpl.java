@@ -1,12 +1,14 @@
 package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.impl;
 
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.UserService;
+import dev.chrisjosue.xatruchbarbershopapi.storage.StorageRepository;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.ConflictException;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.ResourceNotFoundException;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.User;
 import dev.chrisjosue.xatruchbarbershopapi.persistance.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Objects;
 import java.util.Optional;

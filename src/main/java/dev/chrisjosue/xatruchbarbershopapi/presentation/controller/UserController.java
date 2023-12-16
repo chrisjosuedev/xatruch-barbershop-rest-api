@@ -2,6 +2,7 @@ package dev.chrisjosue.xatruchbarbershopapi.presentation.controller;
 
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.builder.ApiBuilder;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.AuthenticationFacade;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.UploadFileFacade;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.UserFacade;
 import dev.chrisjosue.xatruchbarbershopapi.common.enums.Responses;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.PasswordUpdateRequest;
@@ -10,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 
@@ -19,12 +21,21 @@ import java.security.Principal;
 public class UserController {
     private final UserFacade userFacade;
     private final AuthenticationFacade authenticationFacade;
+    private final UploadFileFacade uploadFileFacade;
     private final ApiBuilder apiBuilder;
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
         var userFound = userFacade.findById(id);
         return apiBuilder.build(200, "Usuario encontrado.", userFound, Responses.DATA);
+    }
+
+    @PostMapping("/profile-img")
+    public ResponseEntity<Object> uploadProfile(Principal principal, @RequestParam("image") MultipartFile file) {
+        var loggedUser = authenticationFacade.principalUser(principal);
+        var imageUploaded = uploadFileFacade.uploadImage(file);
+        var userUpdated = userFacade.updateProfilePicture(imageUploaded.getUrl(), loggedUser.getId());
+        return apiBuilder.build(200, "Foto de perfil subida exitosamente.", userUpdated, Responses.DATA);
     }
 
     @PutMapping

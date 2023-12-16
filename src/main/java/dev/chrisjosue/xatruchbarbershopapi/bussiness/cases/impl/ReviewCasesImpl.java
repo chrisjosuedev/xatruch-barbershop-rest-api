@@ -1,6 +1,6 @@
-package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.impl;
+package dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.impl;
 
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.ReviewCases;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.ReviewCases;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.ForbiddenException;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.MethodNotAllowedException;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.ReviewRequest;

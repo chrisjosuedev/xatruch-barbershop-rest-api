@@ -1,7 +1,7 @@
 package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.impl;
 
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.EmailService;
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.SendEmailCase;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.SendEmailCase;
 import dev.chrisjosue.xatruchbarbershopapi.common.enums.Templates;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.InternalServerException;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.BookingDetailDto;

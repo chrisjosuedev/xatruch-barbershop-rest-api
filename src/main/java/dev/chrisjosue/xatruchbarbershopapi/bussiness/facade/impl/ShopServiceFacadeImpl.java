@@ -4,7 +4,7 @@ import dev.chrisjosue.xatruchbarbershopapi.bussiness.facade.ShopServiceFacade;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.shopservice.DomainToShopServiceDtoMapper;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.mapper.shopservice.ShopServiceRequestToDomainMapper;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.ShopServiceService;
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.ShopServiceCases;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.ShopServiceCases;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.ShopServiceRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.ShopServiceDto;
 import lombok.RequiredArgsConstructor;

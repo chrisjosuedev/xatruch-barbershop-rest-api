@@ -1,12 +1,11 @@
-package dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.impl;
+package dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.impl;
 
-import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.cases.BookingCases;
+import dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.BookingCases;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.BadRequestException;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.Booking;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.GlobalSetting;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.Person;
 import dev.chrisjosue.xatruchbarbershopapi.domain.entity.User;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
