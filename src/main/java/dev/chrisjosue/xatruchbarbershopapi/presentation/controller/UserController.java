@@ -34,8 +34,8 @@ public class UserController {
     public ResponseEntity<Object> uploadProfile(Principal principal, @RequestParam("image") MultipartFile file) {
         var loggedUser = authenticationFacade.principalUser(principal);
         var imageUploaded = uploadFileFacade.uploadImage(file);
-        var userUpdated = userFacade.updateProfilePicture(imageUploaded.getUrl(), loggedUser.getId());
-        return apiBuilder.build(200, "Foto de perfil subida exitosamente.", userUpdated, Responses.DATA);
+        userFacade.updateProfilePicture(imageUploaded.getUrl(), loggedUser.getId());
+        return apiBuilder.build(200, "Foto de perfil subida exitosamente.", imageUploaded, Responses.DATA);
     }
 
     @PutMapping

@@ -5,5 +5,5 @@ spring:
     password: ${DB_PASSWORD}
 
 clients:
-    CLIENT_SERVER: http://127.0.0.1:5173
-    CLIENT_SERVER_FORGOT_PASSWORD_URI: http://127.0.0.1:5173/auth/forgot-password/recovery
+  CLIENT_SERVER: http://127.0.0.1:5173
+  CLIENT_SERVER_FORGOT_PASSWORD_URI: http://127.0.0.1:5173/auth/forgot-password/recovery

@@ -12,5 +12,5 @@ public interface UserFacade {
     void signUp(UserRequest userRequest);
     UserDto update(Long id, UserUpdateRequest userUpdateRequest);
     void updatePassword(Long id, PasswordUpdateRequest passwordUpdateRequest);
-    UserDto updateProfilePicture(String url, Long id);
+    void updateProfilePicture(String url, Long id);
 }

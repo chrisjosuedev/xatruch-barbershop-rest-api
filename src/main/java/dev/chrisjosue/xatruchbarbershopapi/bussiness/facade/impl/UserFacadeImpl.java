@@ -53,10 +53,9 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public UserDto updateProfilePicture(String url, Long id) {
+    public void updateProfilePicture(String url, Long id) {
         var userToUpdate = userService.findById(id);
         var userSet = userCases.setUserToUpdateProfilePicture(url, userToUpdate);
-        var userUpdated = userService.update(userSet);
-        return domainToUserDtoMapper.toDto(userUpdated);
+        userService.update(userSet);
     }
 }

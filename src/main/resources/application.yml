@@ -17,8 +17,8 @@ spring:
     default-encoding: UTF-8
     host: smtp.office365.com
     port: 587
-    username: ${OUTLOOK_EMAIL}
-    password: ${OUTLOOK_PASSWORD}
+    username: ${EMAIL}
+    password: ${EMAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -29,6 +29,12 @@ spring:
     test-connection: false
   profiles:
     active: dev
+
+cloudinary:
+  CLOUD_NAME: ${CLOUD_NAME}
+  API_SECRET: ${API_SECRET}
+  API_KEY: ${API_KEY}
+  CLOUDINARY_URI: ${CLOUDINARY_URI}
 
 values:
   DEFAULT_PROFILE_PICTURE: https://res.cloudinary.com/def8hdamv/image/upload/v1701453504/barber-app/qnnolu3m8se0zqe5rilq.png
