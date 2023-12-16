@@ -34,7 +34,7 @@
     <tr>
         <td align="center" bgcolor="#18191F" style="padding: 40px 0 30px 0;">
             <h1>Xatruch Barbershop</h1>
-            <p class="description"> Detalle de la Reserva de Sesión <b><span th:text="${id}"></span></b></p>
+            <p class="description"> Detalle de la Reserva de Sesión # <b><span th:text="${id}"></span></b></p>
         </td>
     </tr>
     <tr>
@@ -42,32 +42,32 @@
             <p th:text="${'Estimad@: ' + name}"></p>
             <hr>
             <p>Código: <b th:text="${id}"></b></p>
-            <p>Fecha: <b th:text="${bookingDate}"></b></p>
-            <p>Hora de Sesión: <b th:text="${bookingTime}"></b></p>
+            <p>Fecha: <b th:text="${#dates.format(bookingDate, 'dd-MMM-yyyy')}"></b></p>
+            <p>Hora de Sesión: <b th:text="${#temporals.format(bookingTime, 'hh:mm a')}"></b></p>
             <!-- Table here --->
-            <table class="table-detail">
-                <thead>
-                <tr>
-                    <th>Servicio</th>
-                    <th>Precio</th>
-                </tr>
-                </thead>
-                <tbody>
-                <!-- Render Table -->
-                <tr th:each="detail : ${details}">
-                    <td th:text="${detail.serviceName}"></td>
-                    <td th:text="${detail.price}"></td>
-                </tr>
-                <tr>
-                    <td style="padding-top:20px">
-                        Total
-                    </td>
-                    <td style="padding-top:20px">
-                        <b>L. <span th:text="${total}"></span></b>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                <table class="table-detail">
+                    <thead>
+                    <tr>
+                        <th>Servicio</th>
+                        <th>Precio</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Render Table -->
+                    <tr th:each="detail : ${details}">
+                        <td th:text="${detail.serviceName}"></td>
+                        <td th:text="${#numbers.formatDecimal(detail.price, 0, 2)}"></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top:20px">
+                            Total
+                        </td>
+                        <td style="padding-top:20px">
+                            <b>L. <span th:text="${#numbers.formatDecimal(total, 0, 2)}"></span></b>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             <br>
         </td>
     </tr>
