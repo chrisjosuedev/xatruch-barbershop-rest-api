@@ -27,7 +27,8 @@ public class AuthenticationController {
 
     @GetMapping("/refresh-token")
     public ResponseEntity<Object> signIn(Principal principal) {
-        var renewedToken = authenticationFacade.refreshToken(principal);
+        var loggedUser = authenticationFacade.principalUser(principal);
+        var renewedToken = authenticationFacade.refreshToken(loggedUser.getEmail());
         return apiBuilder.build(
                 200,
                 "Token renovado.",

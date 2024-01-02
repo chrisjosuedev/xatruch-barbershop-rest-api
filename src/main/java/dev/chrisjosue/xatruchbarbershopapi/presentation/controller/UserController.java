@@ -44,7 +44,7 @@ public class UserController {
         var userUpdated = userFacade.update(loggedUser.getId(), userUpdateRequest);
 
         if (!loggedUser.getEmail().equals(userUpdated.getEmail())) {
-            var renewedCredentials = authenticationFacade.renewTokenWithUpdatedUser(userUpdated.getEmail());
+            var renewedCredentials = authenticationFacade.refreshToken(userUpdated.getEmail());
             return apiBuilder.build(
                     200,
                     "Email del usuario actualizado, refresh token generado.",

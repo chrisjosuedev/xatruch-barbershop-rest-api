@@ -9,7 +9,6 @@ import dev.chrisjosue.xatruchbarbershopapi.bussiness.service.UserService;
 import dev.chrisjosue.xatruchbarbershopapi.bussiness.cases.UserCases;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.request.ForgotPasswordRequest;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.AuthenticationDtoResponse;
-import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.TokenDto;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.UserDto;
 import dev.chrisjosue.xatruchbarbershopapi.security.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -68,16 +67,9 @@ public class AuthenticationFacadeImpl implements AuthenticationFacade {
     }
 
     @Override
-    public AuthenticationDtoResponse renewTokenWithUpdatedUser(String username) {
+    public AuthenticationDtoResponse refreshToken(String username) {
         var userLogged = userService.findUserByEmail(username);
         String jwtToken = jwtService.generateToken(userLogged);
         return authenticationResponseMapper.toDto(userLogged, jwtToken);
-    }
-
-    @Override
-    public TokenDto refreshToken(Principal principal) {
-        var userLogged = authenticationService.getUserLoggedIn(principal);
-        String jwtToken = jwtService.generateToken(userLogged);
-        return new TokenDto(jwtToken);
     }
 }

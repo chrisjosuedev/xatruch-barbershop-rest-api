@@ -3,6 +3,7 @@ package dev.chrisjosue.xatruchbarbershopapi.storage;
 import com.cloudinary.Cloudinary;
 import dev.chrisjosue.xatruchbarbershopapi.common.exceptions.BadRequestException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,6 +17,7 @@ import static dev.chrisjosue.xatruchbarbershopapi.common.utils.constant.ImageSto
 import static dev.chrisjosue.xatruchbarbershopapi.common.utils.constant.ImageStorageConstant.VALID_IMAGE_EXT;
 
 @Component("cloudinaryStorage")
+@Slf4j
 @RequiredArgsConstructor
 public class CloudinaryStorage implements StorageRepository {
     private final Cloudinary cloudinary;

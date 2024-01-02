@@ -12,5 +12,5 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     Optional<Review> findByIdAndIsActiveIsTrue(Long id);
     List<Review> findAllByIsActiveIsTrue();
     List<Review> findAllByIsApprovedIsTrue();
-    List<Review> findAllByUserId(Long userId);
+    List<Review> findAllByUserIdAndIsActiveIsTrue(Long userId);
 }
