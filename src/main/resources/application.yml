@@ -2,6 +2,9 @@ server:
   port: 9090
   servlet:
     context-path: /api
+    multipart:
+      max-file-size: 1024KB
+      max-request-size: 1024KB
 
 spring:
   datasource:

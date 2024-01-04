@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.Length;
 @AllArgsConstructor
 @PasswordMatch(message = "Confirmar Contraseña no coincide.")
 public class PasswordUpdateRequest {
-    @NotEmpty(message = "Contraseña actual es requrida.")
+    @NotEmpty(message = "Contraseña actual es requerida.")
     private String currentPassword;
 
     @NotEmpty(message = "Nueva contraseña es requerida.")

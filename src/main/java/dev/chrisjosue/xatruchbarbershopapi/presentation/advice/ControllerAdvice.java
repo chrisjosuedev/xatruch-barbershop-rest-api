@@ -19,6 +19,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -59,6 +60,12 @@ public class ControllerAdvice {
     public ResponseEntity<Object> conflictException(InternalServerException internalServerException) {
         var errorDto = errorMapper.errorToDto(internalServerException.getField(), internalServerException.getMessage());
         return newErrorExceptionsResponse(List.of(errorDto), internalServerException.getHttpStatus().value(), "Conflictos en el recurso.");
+    }
+
+    @ExceptionHandler(value = MaxUploadSizeExceededException.class)
+    public ResponseEntity<Object> maxSizeException(MaxUploadSizeExceededException maxSizeException) {
+        var errorDto = errorMapper.errorToDto("image","Imagen debe ser < 1MB.");
+        return newErrorExceptionsResponse(List.of(errorDto), 400, "Tamaño de archivo muy grande.");
     }
 
     @ExceptionHandler(value = BadRequestException.class)

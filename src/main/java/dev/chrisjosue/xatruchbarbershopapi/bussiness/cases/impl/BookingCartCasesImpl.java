@@ -19,9 +19,4 @@ public class BookingCartCasesImpl implements BookingCartCases {
         bookingTempCart.setUser(user);
         return bookingTempCart;
     }
-
-    @Override
-    public BookingTempCart executeSetBookingCartToDelete(BookingTempCart bookingTempCart, User user) {
-        return null;
-    }
 }
