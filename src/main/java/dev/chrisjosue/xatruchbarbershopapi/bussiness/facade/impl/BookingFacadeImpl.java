@@ -11,6 +11,7 @@ import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.BookingDetailDto;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.BookingDto;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.BookingGeneralDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalTime;
@@ -18,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class BookingFacadeImpl implements BookingFacade {
     private final BookingService bookingService;
@@ -46,6 +48,7 @@ public class BookingFacadeImpl implements BookingFacade {
         var activeSetting = settingService.findActiveSetting();
 
         var bookingDomain = bookingRequestToDomainMapper.toDomain(bookingRequest);
+
         var bookingSet = bookingCases.setBookingToSave(activeSetting, bookingDomain, barberExists, userLogged);
 
         /* Finding Booked Services by User to Add to BookingDetails */

@@ -42,7 +42,7 @@
             <p th:text="${'Estimad@: ' + name}"></p>
             <hr>
             <p>Código: <b th:text="${id}"></b></p>
-            <p>Fecha: <b th:text="${#dates.format(bookingDate, 'dd-MMM-yyyy')}"></b></p>
+            <p>Fecha: <b th:text="${#temporals.format(bookingDate, 'dd-MMM-yyyy')}"></b></p>
             <p>Hora de Sesión: <b th:text="${#temporals.format(bookingTime, 'hh:mm a')}"></b></p>
             <!-- Table here --->
                 <table class="table-detail">

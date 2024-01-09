@@ -39,7 +39,7 @@ public class SettingController {
     @PostMapping("/active/{id}")
     public ResponseEntity<Object> active(@PathVariable("id") Byte id) {
         var settingActivated = settingFacade.active(id);
-        return apiBuilder.build(200, "Configuración de horario activada por default.", settingActivated, Responses.DATA);
+        return apiBuilder.build(200, "Estatus de horario modificado.", settingActivated, Responses.DATA);
     }
 
     @DeleteMapping("/{id}")

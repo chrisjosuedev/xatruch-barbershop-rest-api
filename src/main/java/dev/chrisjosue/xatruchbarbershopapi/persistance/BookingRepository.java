@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +26,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     WHERE p.isBarber = true\s
     AND p.id = :personId AND b.bookingDate = :bookingDate AND b.bookingTime = :bookingTime
     """)
-    Optional<Booking> findBookingAvailability(Long personId, Date bookingDate, LocalTime bookingTime);
+    Optional<Booking> findBookingAvailability(Long personId, LocalDate bookingDate, LocalTime bookingTime);
 
     List<Booking> findAllByUserId(Long userId);
 }

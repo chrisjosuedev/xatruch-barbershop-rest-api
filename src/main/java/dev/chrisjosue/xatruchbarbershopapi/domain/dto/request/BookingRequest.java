@@ -16,7 +16,7 @@ import java.time.LocalTime;
 public class BookingRequest {
     @NotNull(message = "Fecha de sesión es requerida.")
     @FutureOrPresent(message = "Fecha no puede ser anterior a la actual.")
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate bookingDate;
 
     @NotNull(message = "Hora de sesión es requerida.")

@@ -43,8 +43,7 @@ public class BookingCasesImpl implements BookingCases {
         return LocalTime.of(mainHour, 0, 0);
     }
 
-    private LocalDateTime getBookingDateTime(Date bookingDate, LocalTime bookingTime) {
-        LocalDate localDate = bookingDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        return bookingTime.atDate(localDate).plusDays(1);
+    private LocalDateTime getBookingDateTime(LocalDate bookingDate, LocalTime bookingTime) {
+        return bookingTime.atDate(bookingDate).plusDays(1);
     }
 }

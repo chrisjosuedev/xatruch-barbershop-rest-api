@@ -9,6 +9,7 @@ import dev.chrisjosue.xatruchbarbershopapi.persistance.BookingCartRepository;
 import dev.chrisjosue.xatruchbarbershopapi.persistance.BookingRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
@@ -16,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepository;
@@ -58,6 +60,7 @@ public class BookingServiceImpl implements BookingService {
 
         // Save Order
         var bookingSaved = bookingRepository.save(booking);
+
         // Delete Current Cart
         bookingCartRepository.deleteAllByUserId(bookingSaved.getUser().getId());
 
