@@ -12,8 +12,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,7 +24,10 @@ public class BookingServiceImpl implements BookingService {
     private final BookingCartRepository bookingCartRepository;
 
     @Override
-    public List<LocalTime> findAvailableTimeBarbers(Long personId, Date bookingDate, List<LocalTime> settings) {
+    public List<LocalTime> findAvailableTimeBarbers(Long personId, LocalDate bookingDate, List<LocalTime> settings) {
+        if (bookingDate.isBefore(LocalDate.now()) || bookingDate.equals(LocalDate.now()))
+            throw new ConflictException("Fecha no puede ser anterior o igual al presente.", "bookings");
+
         var barberBookings = bookingRepository.findAllByPersonIdAndBookingDate(personId, bookingDate);
 
         if (barberBookings.isEmpty()) return settings;

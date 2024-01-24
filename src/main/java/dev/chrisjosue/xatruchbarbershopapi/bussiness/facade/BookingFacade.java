@@ -5,12 +5,12 @@ import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.BookingDetailDto;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.BookingDto;
 import dev.chrisjosue.xatruchbarbershopapi.domain.dto.response.BookingGeneralDto;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 public interface BookingFacade {
-    List<LocalTime> findAvailability(Long barberId, Date date);
+    List<LocalTime> findAvailability(Long barberId, LocalDate date);
     List<BookingGeneralDto> findAllBookings();
     List<BookingGeneralDto> findAllBookingsByUser(Long userId);
     List<BookingDetailDto> findBookingById(Long bookingId);

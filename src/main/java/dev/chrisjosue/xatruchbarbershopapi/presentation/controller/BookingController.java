@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/bookings/orders")
@@ -64,7 +64,7 @@ public class BookingController {
             @RequestParam(name = "barberId") Long barberId,
             @RequestParam(name = "date")
             @DateTimeFormat(pattern = "dd-MM-yyyy")
-            Date date) {
+            LocalDate date) {
         var availableTime = bookingFacade.findAvailability(barberId, date);
         return apiBuilder.build(200, String.format("Listado de horas disponibles para barbero con id %s", barberId),
                 availableTime, Responses.DATA);
@@ -75,7 +75,7 @@ public class BookingController {
         var userLogged = authenticationFacade.principalUser(principal);
         var serviceBooked = bookingFacade.bookingASession(bookingRequest, userLogged.getId());
 
-        return apiBuilder.build(201, "Sesión Booked.",
+        return apiBuilder.build(201, "Sesión agendada.",
                 serviceBooked, Responses.DATA);
     }
 }

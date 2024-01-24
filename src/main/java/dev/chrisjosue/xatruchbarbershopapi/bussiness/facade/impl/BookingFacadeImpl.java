@@ -14,8 +14,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 @Component
@@ -35,7 +35,7 @@ public class BookingFacadeImpl implements BookingFacade {
     private final DomainToBookingGeneralDtoMapper domainToBookingGeneralDtoMapper;
 
     @Override
-    public List<LocalTime> findAvailability(Long barberId, Date date) {
+    public List<LocalTime> findAvailability(Long barberId, LocalDate date) {
         var barberExists = barberService.findById(barberId);
         var activeHours = settingService.findActiveHours();
         return bookingService.findAvailableTimeBarbers(barberExists.getId(), date, activeHours);
