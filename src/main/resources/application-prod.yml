@@ -5,7 +5,7 @@ spring:
     password: ${DB_PASSWORD_PROD}
 
 clients:
-  CLIENT_SERVER: ""
+  CLIENT_SERVER: https://xatruch-barbershop-client.vercel.app
   CLIENT_SERVER_FORGOT_PASSWORD_URI: ""
 
 
