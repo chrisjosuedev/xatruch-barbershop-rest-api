@@ -23,7 +23,7 @@ public class JwtServiceImpl implements JwtService {
 
     private static final int MINUTES = 15;
 
-    @Value("${SECRET_KEY}")
+    @Value("${values.SECRET_KEY}")
     private String secretKey;
 
     @Override

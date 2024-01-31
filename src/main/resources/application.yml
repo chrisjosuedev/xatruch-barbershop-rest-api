@@ -7,11 +7,13 @@ server:
       max-request-size: 1024KB
 
 spring:
+  config:
+    import: env.properties
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
   mail:
     default-encoding: UTF-8
@@ -28,7 +30,7 @@ spring:
     protocol: smtp
     test-connection: false
   profiles:
-    active: dev
+    active: prod
 
 cloudinary:
   CLOUD_NAME: ${CLOUD_NAME}
@@ -36,4 +38,5 @@ cloudinary:
   API_KEY: ${API_KEY}
 
 values:
+  SECRET_KEY: 721bae22437679240e714b573f8991f569138758dc88616214ae1edb77d4129b
   DEFAULT_PROFILE_PICTURE: https://res.cloudinary.com/def8hdamv/image/upload/v1701453504/barber-app/qnnolu3m8se0zqe5rilq.png
