@@ -55,9 +55,10 @@ public class BookingFacadeImpl implements BookingFacade {
         var currentCart = bookingCartService.findAll(userLogged.getId());
         var bookSaved = bookingService.bookingSession(bookingSet, currentCart);
 
-        /* Send Email with Detail */
+        /* Send Email with Detail
+        NOTE: Removed, RENDER does not allow stmp from 547 port
         emailService.sendBookingEmail(bookSaved);
-
+        */
         // Map to bookingDto
         return domainToBookingDtoMapper.toDto(bookSaved);
     }
