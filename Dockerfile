@@ -9,6 +9,11 @@ RUN mvn clean install -DskipTests
 FROM openjdk:21-oracle
 WORKDIR /app
 COPY --from=build /app/target/xatruch-barbershop-api-0.0.1-SNAPSHOT.jar ./xatruch-barbershop-api.jar
+
+## STMP PORT
+EXPOSE 587
+
+## App PORT
 EXPOSE 9090
 
 CMD [ "java", "-jar", "xatruch-barbershop-api.jar" ]
